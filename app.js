@@ -1,13 +1,13 @@
 var express = require("express");
 var mongo = require('mongo');
 var passport = require('passport');
+var path = require('path');
 var LocalStrategy = require('passport-local').Strategy;
  
 var app = express();
 app.use(express.logger());
 
 // Configuration
-
 app.configure(function(){
   var allowCrossDomain = function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -28,6 +28,8 @@ app.configure(function(){
   app.use(app.router);
   app.engine('html', require('ejs').renderFile);
 });
+
+require(path.join(__dirname, '/app/models/user.js'));
 
 
 passport.use(new LocalStrategy({
@@ -53,9 +55,12 @@ app.get('/', function(request, response) {
 });
 
 app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
+  function(req, res) {
+    console.log(req.body, 'login');
+  }
+  // passport.authenticate('local', { successRedirect: '/',
+                                   // failureRedirect: '/login',
+                                   // failureFlash: true })
 );
 
 var port = process.env.PORT || 5000;
