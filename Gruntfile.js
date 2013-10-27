@@ -30,7 +30,8 @@ module.exports = function (grunt) {
     yeoman: yeomanConfig,
     watch: {
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/**/*.coffee',
+                '<%= yeoman.app %>/scripts/*.coffee'],
         tasks: ['coffee:dist']
       },
       coffeeTest: {
@@ -351,8 +352,7 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       // 'connect:livereload',
-      'nodemon',
-      'open',
+      // 'open',
       'watch'
     ]);
   });

@@ -19,7 +19,7 @@
 
   <script src="bower_components/angular/angular.js"></script>
 
-  <!-- build:js scripts/modules.js -  ->
+  <!-- build:js scripts/modules.js -->
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -28,6 +28,12 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/js/app.js"></script>
   <script src="scripts/js/controllers/login.js"></script>
+  <script src="scripts/js/controllers/main.js"></script>
   <!-- endbuild -->
+  <script>
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, ['deskQuizApp']);
+  });
+  </script>
 </body>
 </html>

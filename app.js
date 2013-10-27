@@ -6,72 +6,93 @@ var LocalStrategy = require('passport-local').Strategy;
  
 var app = express();
 
-// Configuration
-app.configure(function(){
-  app.use(function staticsPlaceholder(req, res, next) {
-    return next();
-  });
-  var allowCrossDomain = function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "content-type, accept");
-    res.header("Access-Control-Max-Age", 10);
-    res.header('Content-Type', "text/plain");
-    next();
+function findById(id, fn) {
+  var idx = id - 1;
+  if (users[idx]) {
+    fn(null, users[idx]);
+  } else {
+    fn(new Error('User ' + id + ' does not exist'));
   }
+}
 
-  app.set('port', process.env.PORT || 9000);
-  app.engine('html', require('ejs').renderFile);
-  app.set('view engine', 'html');
-  app.use(express.favicon());
-  app.use(express.static(path.join(__dirname,'/public')));
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(allowCrossDomain);
-  app.use(express.cookieParser());
-    //use passport session
-  app.use(passport.initialize());
-  app.use(passport.session());
+function findByUsername(username, fn) {
+  for (var i = 0, len = users.length; i < len; i++) {
+    var user = users[i];
+    if (user.username === username) {
+      return fn(null, user);
+    }
+  }
+  return fn(null, null);
+}
+
+// Configuration
+require(path.join(__dirname, '/app/config.js'))(app);
+
+var User = require(path.join(__dirname, '/app/models/user.js'));
+var Question = require(path.join(__dirname, '/app/models/question.js'));
+
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 });
 
-require(path.join(__dirname, '/app/models/user.js'));
+passport.deserializeUser(function(id, done) {
+  findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 
-
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'passwd'
-  },
+passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+    process.nextTick(function () {
+      findByUsername(username, function(err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
+        if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
+        return done(null, user);
+      })
     });
   }
 ));
 
+
 app.get('/', function(req, res, next) {
   res.type('.html');
+  // res.redirect(path.join(__dirname, '/views/login.html'))
   res.render('index.html');
 });
 
-app.post('/login',
-  function(req, res) {
-    console.log(req.body, 'login');
-    res.send();
-  }
-  // passport.authenticate('local', { successRedirect: '/',
-                                   // failureRedirect: '/login',
-                                   // failureFlash: true })
-);
+app.get('/quiz', function (req, res, next) {
+  // res.type('.html');
+  res.render(path.join(__dirname, 'public/index'));
+});
+
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      req.session.messages =  [info.message];
+      return res.redirect('/quiz')
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/quiz');
+    });
+  })(req, res, next);
+});
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}

@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('deskQuizApp').controller('LoginCtrl', [
+  angular.module('deskQuizApp.login.controller', []).controller('LoginCtrl', [
     '$scope', '$http', function($scope, $http) {
       return $scope.login = function() {
         var options;
@@ -9,7 +9,7 @@
             'Content-Type': 'application/json'
           }
         };
-        return $http.post('http://localhost:5000/login', $scope.user, options).success(function(data, status, headers, config) {
+        return $http.post('/login', $scope.user, options).success(function(data, status, headers, config) {
           return console.log(data);
         }).error(function(error, status, headers, config) {
           return console.log(error, status);

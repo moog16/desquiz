@@ -1,15 +1,16 @@
 (function() {
   'use strict';
-  angular.module('deskQuizApp', []).config(function($routeProvider) {
+  var deskQuizApp;
+
+  deskQuizApp = angular.module('deskQuizApp', ['deskQuizApp.main.controller', 'deskQuizApp.login.controller']);
+
+  deskQuizApp.config(function($routeProvider) {
     return $routeProvider.when('/', {
-      templateUrl: 'views/login.html',
-      controller: 'LoginCtrl'
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
     }).otherwise({
       redirectTo: '/'
     });
-  }).config(function($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    return delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });
 
 }).call(this);
