@@ -13,7 +13,7 @@ require(path.join(__dirname, '/app/config.js'))(app);
 // Models
 require(path.join(__dirname, '/app/models/user.js'))();
 require(path.join(__dirname, '/app/models/question.js'))();
-/*
+
 function findById(id, fn) {
   var idx = id - 1;
   if (users[idx]) {
@@ -32,6 +32,7 @@ function findByUsername(username, fn) {
   }
   return fn(null, null);
 };
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -53,7 +54,7 @@ passport.use(new LocalStrategy(
       })
     });
   }
-));*/
+));
 
 // Routes
 require(path.join(__dirname, '/app/routes.js'))(app);

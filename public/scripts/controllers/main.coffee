@@ -2,6 +2,9 @@
 
 angular.module('deskQuizApp.main.controller', [])
   .controller 'MainCtrl', ['$scope', '$http', ($scope, $http) ->
-    $scope.quizQuestions = 
-      name: 'hello'
+    $http.get('http://localhost:9000/quiz')
+    .success (data) ->
+      $scope.questions = data
+
+
   ]
