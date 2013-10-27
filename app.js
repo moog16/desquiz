@@ -11,11 +11,9 @@ var app = express();
 require(path.join(__dirname, '/app/config.js'))(app);
 
 // Models
-// var User = 
-require(path.join(__dirname, '/app/models/user.js'));
-// var Question = 
-require(path.join(__dirname, '/app/models/question.js'));
-
+require(path.join(__dirname, '/app/models/user.js'))();
+require(path.join(__dirname, '/app/models/question.js'))();
+/*
 function findById(id, fn) {
   var idx = id - 1;
   if (users[idx]) {
@@ -55,10 +53,10 @@ passport.use(new LocalStrategy(
       })
     });
   }
-));
+));*/
 
 // Routes
-require(path.join(__dirname, '/app/routes.js'))(app, mongoose);
+require(path.join(__dirname, '/app/routes.js'))(app);
 
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));

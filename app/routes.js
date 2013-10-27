@@ -1,9 +1,10 @@
-module.exports = function(app, mongoose) {
-  var Question = mongoose.model('Question');
+var mongoose = require('mongoose');
+var Question = mongoose.model('Question');
+
+module.exports = function(app) {
 
   app.get('/', function(req, res, next) {
     res.type('.html');
-    // res.redirect(path.join(__dirname, '/views/login.html'))
     res.render('index.html');
   });
 
