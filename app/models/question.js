@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 module.exports = function() {
   var QuestionSchema = new Schema ({
     question: String,
-    answers: []
+    answers: [],
+    type: String
   });
 
   return mongoose.model('Question', QuestionSchema);

@@ -29,3 +29,8 @@ body {
   line-height: 1;
   letter-spacing: -1px;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000332}}
+.questionText {
+  margin: 20px 0px;
+}

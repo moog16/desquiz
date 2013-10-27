@@ -1,5 +1,12 @@
 <div class='hero-unit'>
   <div>
-    {{questions[0].question}}
+    <div class="questionText">{{questions[0].question}}</div>
+    <form ng-show='questions[0].type === "multi"'>
+      <label class='topcoat-radio-button' ng-repeat='answer in questions[0].answers'>
+        <input type='radio' name='topcoat'>
+        <div class='topcoat-radio-button__checkmark'></div>
+        {{answer}}
+      </label>
+    </form>
   </div>
 </div>
