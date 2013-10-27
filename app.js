@@ -1,7 +1,7 @@
 var express = require("express");
 var mongo = require('mongo');
-var passport = require('passport');
 var path = require('path');
+var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
  
 var app = express();
@@ -56,43 +56,8 @@ passport.use(new LocalStrategy(
   }
 ));
 
-
-app.get('/', function(req, res, next) {
-  res.type('.html');
-  // res.redirect(path.join(__dirname, '/views/login.html'))
-  res.render('index.html');
-});
-
-app.get('/quiz', function (req, res, next) {
-  // res.type('.html');
-  res.render(path.join(__dirname, 'public/index'));
-});
-
-app.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err) }
-    if (!user) {
-      req.session.messages =  [info.message];
-      return res.redirect('/quiz')
-    }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/quiz');
-    });
-  })(req, res, next);
-});
-
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+require(path.join(__dirname, '/app/routes.js'))(app);
 
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
 });
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
