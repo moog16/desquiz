@@ -53,6 +53,29 @@ module.exports = function (grunt) {
         ]
       }
     },
+    nodemon: {
+      dev: {
+        options: {
+          file: 'app.js',
+          // args: ['production'],
+          nodeArgs: ['--debug'],
+          ignoredFiles: ['README.md', 'node_modules/**'],
+          watchedExtensions: ['js'],
+          watchedFolders: ['app/**/*'],
+          delayTime: 1,
+          legacyWatch: true,
+          env: {
+            PORT: '8181'
+          },
+          cwd: __dirname
+        }
+      },
+      exec: {
+        options: {
+          exec: 'less'
+        }
+      }
+    },
     connect: {
       options: {
         port: 9000,
@@ -102,7 +125,9 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '!<%= yeoman.dist %>/.git*',
+            'public/scripts/js',
+            'public/styles/css'
           ]
         }]
       },
@@ -123,7 +148,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/scripts',
           src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
+          dest: 'public/scripts/js',
           ext: '.js'
         }]
       },
@@ -140,8 +165,8 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
+        cssDir: 'public/styles/css',
+        generatedImagesDir: 'public/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
@@ -259,7 +284,7 @@ module.exports = function (grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: 'public/images',
           dest: '<%= yeoman.dist %>/images',
           src: [
             'generated/*'
@@ -318,13 +343,17 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+      return grunt.task.run(['build',
+        'open', 
+        'connect:dist:keepalive'
+      ]);
     }
 
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      'connect:livereload',
+      // 'connect:livereload',
+      'nodemon',
       'open',
       'watch'
     ]);
@@ -348,7 +377,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'nodemon'
   ]);
 
   grunt.registerTask('default', [

@@ -5,10 +5,12 @@ var path = require('path');
 var LocalStrategy = require('passport-local').Strategy;
  
 var app = express();
-app.use(express.logger());
 
 // Configuration
 app.configure(function(){
+  app.use(function staticsPlaceholder(req, res, next) {
+    return next();
+  });
   var allowCrossDomain = function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -18,15 +20,20 @@ app.configure(function(){
     res.header('Content-Type', "text/plain");
     next();
   }
-  app.set('views', __dirname + '/public');
-  //public.set('view engine', 'jade');
+
+  app.set('port', process.env.PORT || 9000);
+  app.engine('html', require('ejs').renderFile);
+  app.set('view engine', 'html');
+  app.use(express.favicon());
+  app.use(express.static(path.join(__dirname,'/public')));
+  app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(allowCrossDomain);
   app.use(express.cookieParser());
-  app.use(express.static(__dirname + '/public'));
-  app.use(app.router);
-  app.engine('html', require('ejs').renderFile);
+    //use passport session
+  app.use(passport.initialize());
+  app.use(passport.session());
 });
 
 require(path.join(__dirname, '/app/models/user.js'));
@@ -50,20 +57,21 @@ passport.use(new LocalStrategy({
   }
 ));
 
-app.get('/', function(request, response) {
-  response.render('index.html')
+app.get('/', function(req, res, next) {
+  res.type('.html');
+  res.render('index.html');
 });
 
 app.post('/login',
   function(req, res) {
     console.log(req.body, 'login');
+    res.send();
   }
   // passport.authenticate('local', { successRedirect: '/',
                                    // failureRedirect: '/login',
                                    // failureFlash: true })
 );
 
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
+app.listen(app.get('port'), function() {
+  console.log("Listening on " + app.get('port'));
 });
