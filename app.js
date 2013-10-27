@@ -1,18 +1,20 @@
 var express = require("express");
-var mongo = require('mongo');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
- 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/deskQuiz');
+
 var app = express();
 
 // Configuration
 require(path.join(__dirname, '/app/config.js'))(app);
 
-
 // Models
-var User = require(path.join(__dirname, '/app/models/user.js'));
-var Question = require(path.join(__dirname, '/app/models/question.js'));
+// var User = 
+require(path.join(__dirname, '/app/models/user.js'));
+// var Question = 
+require(path.join(__dirname, '/app/models/question.js'));
 
 function findById(id, fn) {
   var idx = id - 1;
@@ -56,7 +58,7 @@ passport.use(new LocalStrategy(
 ));
 
 // Routes
-require(path.join(__dirname, '/app/routes.js'))(app);
+require(path.join(__dirname, '/app/routes.js'))(app, mongoose);
 
 app.listen(app.get('port'), function() {
   console.log("Listening on " + app.get('port'));
