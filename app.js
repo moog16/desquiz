@@ -6,6 +6,14 @@ var LocalStrategy = require('passport-local').Strategy;
  
 var app = express();
 
+// Configuration
+require(path.join(__dirname, '/app/config.js'))(app);
+
+
+// Models
+var User = require(path.join(__dirname, '/app/models/user.js'));
+var Question = require(path.join(__dirname, '/app/models/question.js'));
+
 function findById(id, fn) {
   var idx = id - 1;
   if (users[idx]) {
@@ -13,7 +21,7 @@ function findById(id, fn) {
   } else {
     fn(new Error('User ' + id + ' does not exist'));
   }
-}
+};
 
 function findByUsername(username, fn) {
   for (var i = 0, len = users.length; i < len; i++) {
@@ -23,16 +31,7 @@ function findByUsername(username, fn) {
     }
   }
   return fn(null, null);
-}
-
-// Configuration
-require(path.join(__dirname, '/app/config.js'))(app);
-
-var User = require(path.join(__dirname, '/app/models/user.js'));
-var Question = require(path.join(__dirname, '/app/models/question.js'));
-
-
-
+};
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -56,6 +55,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
+// Routes
 require(path.join(__dirname, '/app/routes.js'))(app);
 
 app.listen(app.get('port'), function() {

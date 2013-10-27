@@ -7,5 +7,5 @@ module.exports = function() {
     answers: []
   });
 
-  return mongoose.model('Question', UserSchema);
+  return mongoose.model('Question', QuestionSchema);
 };

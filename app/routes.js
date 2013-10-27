@@ -1,3 +1,6 @@
+var mongoose = require('mongoose');
+var Question = mongoose.model('Question');
+
 module.exports = function(app) {
   app.get('/', function(req, res, next) {
     res.type('.html');
@@ -6,8 +9,13 @@ module.exports = function(app) {
   });
 
   app.get('/quiz', function (req, res, next) {
-    // res.type('.html');
-    res.render(path.join(__dirname, 'public/index'));
+    Question.find({}, function(err, questions) {
+      if(err) {
+        throw err;
+      } else if(questions) {
+        res.send(questions);
+      }
+    });
   });
 
   app.post('/login', function(req, res, next) {
