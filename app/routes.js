@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
+var passport = require('passport');
 var Question = mongoose.model('Question');
+var path = require('path');
 
 module.exports = function(app) {
 
@@ -17,6 +19,41 @@ module.exports = function(app) {
       }
     });
   });
+
+  app.post('/submitQA', function(req, res, next) {
+    User.findOne({
+      '_id': req.user._id
+    }, function(err, user) {
+
+    });
+    res.send('success');
+  });
+
+
+
+  app.get('/login', function(req, res, next) {
+    res.render(path.join(__dirname, '/../public/views/login.html'));
+  });
+
+  app.post('/login', 
+    passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
+    function(req, res) {
+      res.redirect('/');
+  });
+
+
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
+
+  function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login');
+  }
+};
+
 
 
   // app.get('/create', function(req, res, next) {
@@ -64,30 +101,3 @@ module.exports = function(app) {
   //   })
   //   res.send('ssuccss');
   // })
-
-  app.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-      if (err) { return next(err) }
-      if (!user) {
-        req.session.messages =  [info.message];
-        return res.redirect('/quiz')
-      }
-      req.logIn(user, function(err) {
-        if (err) { return next(err); }
-        return res.redirect('/quiz');
-      });
-    })(req, res, next);
-  });
-
-
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
-
-
-  function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login')
-  }
-};

@@ -1,11 +1,10 @@
 <div class="hero-unit">
-  <form ng-submit="login()">
+  <form action='/login' method='post'>
     <legend>Login</legend>
 
     <input class="topcoat-text-input--large" type="text" name="email" ng-model="user.email" placeholder="email"> 
     <br>
     <input class="topcoat-text-input--large" type="password" name="pwd" ng-model="user.pwd" placeholder="password">
-
-    <button class="btn btn-primary">Login</button>
+    <input class="btn btn-primary" type="submit" value="Login"/>
 </form>
 </div>

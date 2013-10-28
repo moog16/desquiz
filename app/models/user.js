@@ -6,7 +6,7 @@ module.exports = function() {
     name: String,
     email: String,
     password: String,
-    quiz: {}
+    quizResults: {}
   });
 
   return mongoose.model('User', UserSchema);

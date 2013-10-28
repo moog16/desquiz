@@ -343,7 +343,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build',
-        'open', 
+        'open',
         'connect:dist:keepalive'
       ]);
     }
