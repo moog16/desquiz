@@ -1,5 +1,4 @@
 var express = require('express');
-var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
 
@@ -30,7 +29,5 @@ module.exports = function(app) {
     app.use(express.cookieParser());
     app.use(express.session({ secret: 'keyboard' }));
     app.use(flash());
-    app.use(passport.initialize());
-    app.use(passport.session());
   });
 };

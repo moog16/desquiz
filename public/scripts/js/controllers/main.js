@@ -2,7 +2,8 @@
   'use strict';
   angular.module('deskQuizApp.main.controller', []).controller('MainCtrl', [
     '$scope', 'server', '$location', function($scope, server, $location) {
-      var promise, user;
+      var promise, url, user;
+      url = 'http://localhost:9000';
       $scope.active = 0;
       user = {};
       user.results = [];
