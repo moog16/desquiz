@@ -1,14 +1,14 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.main.controller', []).controller('MainCtrl', [
-    '$scope', '$http', '$location', function($scope, $http, $location) {
-      var url, user;
-      url = 'http://localhost:9000';
+    '$scope', 'server', '$location', function($scope, server, $location) {
+      var promise, user;
       $scope.active = 0;
       user = {};
       user.results = [];
-      $http.get(url + '/quiz').success(function(data) {
-        return $scope.questions = data;
+      promise = server.getQuestions();
+      promise.then(function(questions) {
+        return $scope.questions = questions;
       });
       $scope.checkRadio = function(answer) {
         $scope.validAnswer = true;

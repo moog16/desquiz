@@ -20,11 +20,11 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/submitQA', function(req, res, next) {
+  app.post('/results', function(req, res, next) {
     User.findOne({
       '_id': req.user._id
     }, function(err, user) {
-
+      
     });
     res.send('success');
   });

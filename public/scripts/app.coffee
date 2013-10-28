@@ -2,6 +2,7 @@
 
 deskQuizApp = angular.module 'deskQuizApp', [
   'deskQuizApp.main.controller'
+  'deskQuizApp.results.controller'
   'deskQuizApp.login.controller'
   'deskQuizApp.server.service'
 ]

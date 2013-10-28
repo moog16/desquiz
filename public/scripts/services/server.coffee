@@ -20,8 +20,10 @@ angular.module('deskQuizApp.server.service', [])
         console.log err
 
       deferred.promise;
+    
+    getResults = () ->
 
-    return
-      sendAnswers: sendAnswers
-      getQuestions: getQuestions
+    sendAnswers: sendAnswers
+    getQuestions: getQuestions
+    getResults: getResults
   ]
