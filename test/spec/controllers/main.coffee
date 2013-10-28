@@ -26,7 +26,7 @@ describe 'Controller: MainCtrl', () ->
      $httpBackend.verifyNoOutstandingRequest()
 
   it 'should attach a list of awesomeThings to the scope', () ->
-    console.log scope.questions
     expect(scope.questions.length).toBe 1
-  it 'should '
+  it 'should ', () ->
+    
 
