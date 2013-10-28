@@ -1,14 +1,15 @@
 'use strict'
 
 angular.module('deskQuizApp.main.controller', [])
-  .controller 'MainCtrl', ['$scope', '$http', '$location', ($scope, $http, $location) ->
+  .controller 'MainCtrl', ['$scope', 'server', '$location', ($scope, server, $location) ->
     url = 'http://localhost:9000'
     $scope.active = 0
+    user = {}
     user.results = []
 
-    $http.get(url + '/quiz')
-    .success (data) ->
-      $scope.questions = data
+    promise = server.getQuestions()
+    promise.then (questions) ->
+      $scope.questions = questions
 
     $scope.checkRadio = (answer) ->
       $scope.validAnswer = true

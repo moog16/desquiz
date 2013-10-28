@@ -1,7 +1,9 @@
 'use strict'
+
 deskQuizApp = angular.module 'deskQuizApp', [
   'deskQuizApp.main.controller'
   'deskQuizApp.login.controller'
+  'deskQuizApp.server.service'
 ]
 
 deskQuizApp.config ($routeProvider) ->
