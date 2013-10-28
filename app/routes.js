@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
-var passport = require('passport');
 var Question = mongoose.model('Question');
 var path = require('path');
 
 module.exports = function(app) {
 
-  app.get('/', ensureAuthenticated, function(req, res, next) {
+  app.get('/', function(req, res, next) {
     res.type('.html');
     res.render('index.html');
   });
@@ -24,34 +23,17 @@ module.exports = function(app) {
     User.findOne({
       '_id': req.user._id
     }, function(err, user) {
-      
+
     });
     res.send('success');
   });
 
+  app.post('/user', function(req, res, next) {
+    var user = req.body;
+    User.findOne({
 
-
-  app.get('/login', function(req, res, next) {
-    res.render(path.join(__dirname, '/../public/views/login.html'));
+    })
   });
-
-  app.post('/login', 
-    passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-    function(req, res) {
-      res.redirect('/');
-  });
-
-
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
-
-
-  function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login');
-  }
 };
 
 
