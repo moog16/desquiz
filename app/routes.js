@@ -21,7 +21,7 @@ module.exports = function(app) {
 
   app.post('/results', function(req, res, next) {
     User.findOne({
-      '_id': req.user._id
+      '_id': req.body._id
     }, function(err, user) {
 
     });
@@ -30,11 +30,25 @@ module.exports = function(app) {
 
   app.post('/user', function(req, res, next) {
     var user = req.body;
-    User.findOne({
-
-    })
+    console.log(user);
+    res.send('user save ');
+    // User.findOne({
+    //   'email': user.
+    // }, function(err, user) {
+    //   if(!user) {
+    //     user = new User({
+    //       name: user
+    //     })
+    //   }
+    // });
   });
 };
+  // var UserSchema = new Schema ({
+  //   name: String,
+  //   email: String,
+  //   password: String,
+  //   quizResults: {}
+  // });
 
 
 
