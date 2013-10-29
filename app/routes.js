@@ -4,26 +4,26 @@ var User = mongoose.model('User');
 var path = require('path');
 
 var questionAnswerMapper = function(results) {
-  var newResult = [];
-  for(var i=0; i<results.length; i++) {
-    Question.findOne({
-      '_id': results[i].question
-    }, function(err, question) {
-      var correct;
-      if(question.type === 'multi') {
-        correct = question.answers[question.correctAnswer];
-      } else if(question.type === 'fillin') {
-        correct = question.correctAnswer;
-      }
-      console.log(results[i]);
-      newResult.push({
-        answer: results[i].answer,
-        question: question.question,
-        correctAnswer: correct
-      });
-    });
-  }
-  return newResult;
+  // var newResult = [];
+  // for(var i=0; i<results.length; i++) {
+  //   Question.findOne({
+  //     '_id': results[i].question
+  //   }, function(err, question) {
+  //     var correct;
+  //     if(question.type === 'multi') {
+  //       correct = question.answers[question.correctAnswer];
+  //     } else if(question.type === 'fillin') {
+  //       correct = question.correctAnswer;
+  //     }
+  //     console.log(results[i]);
+  //     newResult.push({
+  //       answer: results[i].answer,
+  //       question: question.question,
+  //       correctAnswer: correct
+  //     });
+  //   });
+  // }
+  // return newResult;
 };
 
 module.exports = function(app) {
@@ -132,7 +132,8 @@ module.exports = function(app) {
       'sid': req.cookies['connect.sid']
     }, function(err, user) {
       if(user) {
-        res.send(questionAnswerMapper(user.quizResults));
+        // res.send(questionAnswerMapper(user.quizResults));
+        res.send(user.quizResults);
       } else if (err) {
         res.send('error', err);
       }

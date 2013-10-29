@@ -6,4 +6,6 @@ angular.module('deskQuizApp.results.controller', [])
     .then (results) ->
       $scope.results = results
 
+    $scope.questions = quizMaterial.getQuestions()
+
   ]
