@@ -15,23 +15,38 @@ angular.module('deskQuizApp.main.controller', [])
     quizMaterial.getQuestions()
     .then (questions) ->
       $scope.questions = questions
+      $scope.renderQuestion = (questions[0].question).replace('\n', '<br>\n')
 
     $scope.checkRadio = (answer) ->
       $scope.validAnswer = true
       $scope.answer = answer
 
-    $scope.submitAnswer = ->
-      quizTaker.results.push
-        answer: $scope.answer
-        question: $scope.questions[$scope.active]._id
+    $scope.makeArray = (size) ->
+      if size then new Array parseInt(size)
 
+    nextQuestion = ->
       if $scope.active < $scope.questions.length-1
         $scope.active++
+        $scope.renderQuestion = $scope.questions[$scope.active].question.replace('\n', '<br>\n')
       else
         quizMaterial.postAnswers quizTaker.results
         $location.path '/results'
 
-    $scope.makeArray = (size) ->
-      new Array parseInt(size)
+    $scope.submitAnswer = ->
+      quizTaker.results.push
+        answer: $scope.answer
+        question: $scope.questions[$scope.active]._id
+      nextQuestion()
+
+
+    $scope.submitFillin = () ->
+      answerArr = []
+      answers = document.getElementsByClassName 'oneLine'
+      answerArr.push answer.value for answer in answers 
+      quizTaker.results.push
+        answer: answerArr
+        question: $scope.questions[$scope.active]._id
+      nextQuestion()
+
 
   ]

@@ -1,5 +1,5 @@
 <div class='hero-unit'>
-  <div class="questionText">{{questions[active].question}}</div>
+  <div class="questionText">{{renderQuestion}}</div>
   <form ng-show='questions[active].type == "multi"'>
     <label class='topcoat-radio-button radioButton' ng-repeat='answer in questions[active].answers'>
       <input type='radio' ng-click='checkRadio(answer)'>
@@ -12,6 +12,6 @@
 
   <form ng-show='questions[active].type == "fillin"'>
     <input type='text' class='topcoat-text-input--large oneLine' placeholder='Answer' ng-repeat='i in makeArray(questions[active].answers)'>
-    <button class='topcoat-button--large'>Next</button>
+    <button ng-click='submitFillin()' class='topcoat-button--large'>Next</button>
   </form>
 </div>
