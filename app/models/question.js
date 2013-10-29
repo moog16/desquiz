@@ -5,6 +5,7 @@ module.exports = function() {
   var QuestionSchema = new Schema ({
     question: String,
     answers: [],
+    correctAnswer: String,
     type: String
   });
 

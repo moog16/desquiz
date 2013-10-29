@@ -1,3 +1,9 @@
 <div class='hero-unit'>
   {{results}}
+  <ul>
+    <li ng-repeat='result in results'>
+      {{result}}
+    </li>
+  </ul>
+  <button ng-click='logout()' class='topcoat-button--quiet logout'>Logout</button>
 </div>
