@@ -6,7 +6,7 @@
       <div class='topcoat-radio-button__checkmark'></div>
       {{answer}}
     </label>
-    <button ng-click='submitAnswer()' class='topcoat-button--large'>Next</button>
+    <button ng-click='submitAnswer()' class='topcoat-button--large' ng-disabled='!validAnswer'>Next</button>
   </form>
 
 
