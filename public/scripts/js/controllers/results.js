@@ -14,19 +14,32 @@
         return user.logout();
       };
       checkFillin = function(result, questions) {
-        var _fn, _i, _len, _ref;
-        questions = JSON.parse(questions.correctAnswer);
+        var answers, match, _fn, _i, _len, _ref;
+        answers = JSON.parse(questions.correctAnswer);
+        match = true;
         _ref = result.answer;
         _fn = function() {
-          if (questions.indexOf(result === -1)) {
+          var answer, _j, _len1, _results;
+          if (!match) {
             return false;
           }
+          match = false;
+          _results = [];
+          for (_j = 0, _len1 = answers.length; _j < _len1; _j++) {
+            answer = answers[_j];
+            _results.push((function() {
+              if (result === answer) {
+                return match = true;
+              }
+            })());
+          }
+          return _results;
         };
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           result = _ref[_i];
           _fn();
         }
-        return true;
+        return match;
       };
       return questionAnswerMap = function(results, questions) {
         var newResults, result, _fn, _i, _len;
@@ -47,7 +60,7 @@
                 correct = false;
                 if (question.type === 'fillin') {
                   correct = checkFillin(result, question);
-                  correctAnswer = JSON.parse(questions.correctAnswer);
+                  correctAnswer = JSON.parse(question.correctAnswer);
                 } else if (result.answer === correctAnswer) {
                   $scope.correct++;
                   correct = true;
