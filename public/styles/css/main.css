@@ -51,3 +51,30 @@ body {
 .logout {
   float: right;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000350}}
+.answers {
+  font-size: 14px;
+  color: rgba(150, 147, 147, 0.79);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000355}}
+ul li {
+  list-style: none;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000359}}
+.green {
+  color: green;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000363}}
+.red {
+  color: red;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000367}}
+.totalScore {
+  color: #2d34d1;
+  font-size: 30px;
+}

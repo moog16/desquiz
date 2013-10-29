@@ -2,12 +2,14 @@
 
 angular.module('deskQuizApp.results.controller', [])
   .controller 'ResultsCtrl', ['$scope', 'quizMaterial', ($scope, quizMaterial) ->
+    $scope.correct = 0
 
     quizMaterial.getResults()
     .then (results) ->
       quizMaterial.getQuestions()
       .then (questions) ->
         $scope.results = questionAnswerMap results, questions
+        $scope.score = (($scope.correct/questions.length)*100).toFixed(1)
 
     questionAnswerMap = (results, questions) ->
       newResults = []
@@ -21,10 +23,17 @@ angular.module('deskQuizApp.results.controller', [])
               question = questions[index]
               if questionId is question._id
                 correctAnswerInd = question.correctAnswer
+                correctAnswer = question.answers[correctAnswerInd]
+                correct = false
+                if result.answer is correctAnswer
+                  $scope.correct++
+                  correct = true
+
                 newResults.push(
                   answer: result.answer
                   question: question.question
-                  correctAnswer: question.answers[correctAnswerInd])
+                  correctAnswer: correctAnswer
+                  correct: correct)
                 index = 0
                 found = true
               index++

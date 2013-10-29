@@ -9,8 +9,8 @@ angular.module('deskQuizApp.quizMaterial.service', [])
       deferred = $q.defer()
       $http.get(url + resource)
       .success (data, status, headers, config) ->
-        console.log data
-        if resource is '/quiz' then savedQuestions = data
+        # console.log data
+        # if resource is '/quiz' then savedQuestions = data
         deferred.resolve data
       .error (err, status, headers, config) ->
         console.log err

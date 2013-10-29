@@ -3,9 +3,11 @@
   angular.module('deskQuizApp.results.controller', []).controller('ResultsCtrl', [
     '$scope', 'quizMaterial', function($scope, quizMaterial) {
       var questionAnswerMap;
+      $scope.correct = 0;
       quizMaterial.getResults().then(function(results) {
         return quizMaterial.getQuestions().then(function(questions) {
-          return $scope.results = questionAnswerMap(results, questions);
+          $scope.results = questionAnswerMap(results, questions);
+          return $scope.score = (($scope.correct / questions.length) * 100).toFixed(1);
         });
       });
       return questionAnswerMap = function(results, questions) {
@@ -19,14 +21,21 @@
           _results = [];
           while (!found || index === questions.length - 1) {
             _results.push((function() {
-              var correctAnswerInd, question;
+              var correct, correctAnswer, correctAnswerInd, question;
               question = questions[index];
               if (questionId === question._id) {
                 correctAnswerInd = question.correctAnswer;
+                correctAnswer = question.answers[correctAnswerInd];
+                correct = false;
+                if (result.answer === correctAnswer) {
+                  $scope.correct++;
+                  correct = true;
+                }
                 newResults.push({
                   answer: result.answer,
                   question: question.question,
-                  correctAnswer: question.answers[correctAnswerInd]
+                  correctAnswer: correctAnswer,
+                  correct: correct
                 });
                 index = 0;
                 found = true;

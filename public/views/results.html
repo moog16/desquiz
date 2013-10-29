@@ -1,9 +1,25 @@
 <div class='hero-unit'>
-  {{results}} <br><br><br>
-  <ul>
+  Score:
+  <div>
+    {{correct}} / {{results.length}} = <span class='totalScore'>{{score}}%</span>
+  </div>
+
+  <ol>
     <li ng-repeat='result in results'>
-      <!-- {{result}} -->
+      {{result.question}}
+      <ul>
+        <li>
+          <span class='answers'>Your Answer:</span> {{result.answer}}
+        </li>
+        <li>
+          <span class='answers'>Correct Answer:</span> {{result.correctAnswer}}
+        </li>
+      </ul>
+      <span class='icon-checkmark green' ng-show='result.correct'></span>
+      <span class='icon-close red' ng-hide='result.correct'></span>
     </li>
-  </ul>
+  </ol>
+
+
   <button ng-click='logout()' class='topcoat-button--quiet logout'>Logout</button>
 </div>

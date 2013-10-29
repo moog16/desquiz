@@ -8,11 +8,6 @@
         var deferred;
         deferred = $q.defer();
         $http.get(url + resource).success(function(data, status, headers, config) {
-          var savedQuestions;
-          console.log(data);
-          if (resource === '/quiz') {
-            savedQuestions = data;
-          }
           return deferred.resolve(data);
         }).error(function(err, status, headers, config) {
           console.log(err);
