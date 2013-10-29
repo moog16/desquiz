@@ -8,6 +8,36 @@ module.exports = function(app) {
     res.type('html');
     res.render('index.html');
   });
+
+  app.get('/login', function(req, res, next) {
+    res.type('html');
+    res.render('login.html');
+  });
+
+  app.post('/login', function(req, res, next) {
+    console.log(req.body);
+    User.findOne({
+      'email': req.body.email
+    }, function(err, user) {
+      if(!user) {
+        user.email = req.body.email;
+        user.password = req.body.pwd;
+        user.save(function(err) {
+          if(err) throw err;
+          res.redirect('/');
+        });
+      } else if(user) {
+        if(user.password === req.body.pwd) {
+          res.redirect('/');
+        } else {
+          res.send('incorrect password');
+        }
+      } else if (err) {
+        res.send('error', err);
+      }
+    });
+  })
+
   app.get('/quiz', function (req, res, next) {
     Question.find({}, function(err, questions) {
       if(err) {
