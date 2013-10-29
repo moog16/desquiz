@@ -17,7 +17,7 @@
       };
       postAnswers = function(quizTakerResults) {
         return $http.post(url + '/results', quizTakerResults).success(function(data, status, headers, config) {
-          return console.log(data);
+          return console.log;
         }).error(function(err, status, headers, config) {
           return console.log(err, 'error');
         });

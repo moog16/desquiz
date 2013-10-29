@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.results.controller', []).controller('ResultsCtrl', [
-    '$scope', 'quizMaterial', function($scope, quizMaterial) {
+    '$scope', 'quizMaterial', 'user', function($scope, quizMaterial, user) {
       var questionAnswerMap;
       $scope.correct = 0;
       quizMaterial.getResults().then(function(results) {
@@ -10,6 +10,9 @@
           return $scope.score = (($scope.correct / questions.length) * 100).toFixed(1);
         });
       });
+      $scope.logout = function() {
+        return user.logout();
+      };
       return questionAnswerMap = function(results, questions) {
         var newResults, result, _fn, _i, _len;
         newResults = [];

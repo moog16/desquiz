@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('deskQuizApp.results.controller', [])
-  .controller 'ResultsCtrl', ['$scope', 'quizMaterial', ($scope, quizMaterial) ->
+  .controller 'ResultsCtrl', ['$scope', 'quizMaterial', 'user', ($scope, quizMaterial, user) ->
     $scope.correct = 0
 
     quizMaterial.getResults()
@@ -10,6 +10,9 @@ angular.module('deskQuizApp.results.controller', [])
       .then (questions) ->
         $scope.results = questionAnswerMap results, questions
         $scope.score = (($scope.correct/questions.length)*100).toFixed(1)
+
+    $scope.logout = () ->
+      user.logout()
 
     questionAnswerMap = (results, questions) ->
       newResults = []

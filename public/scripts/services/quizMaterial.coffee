@@ -21,7 +21,7 @@ angular.module('deskQuizApp.quizMaterial.service', [])
     postAnswers = (quizTakerResults) ->
       $http.post(url + '/results', quizTakerResults)
       .success (data, status, headers, config) ->
-        console.log data
+        console.log
       .error (err, status, headers, config) ->
         console.log err, 'error'
 
