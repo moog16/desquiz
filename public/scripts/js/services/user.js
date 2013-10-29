@@ -11,7 +11,11 @@
         }
       };
       setLogin = function(loginCred) {
-        return console.log(loginCred);
+        return $http.post('/user', loginCred).success(function(newUser, status, headers, config) {
+          return $cookies.userCookie = newUser._id;
+        }).error(function(err, status, headers, config) {
+          return console.log(err);
+        });
       };
       return {
         loggedIn: loggedIn,

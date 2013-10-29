@@ -10,7 +10,11 @@ angular.module('deskQuizApp.user.service', [])
         false
 
     setLogin = (loginCred) ->
-      console.log loginCred
+      $http.post('/user', loginCred)
+      .success (newUser, status, headers, config) ->
+        $cookies.userCookie = newUser._id
+      .error (err, status, headers, config) ->
+        console.log err
 
     loggedIn: loggedIn
     setLogin: setLogin
