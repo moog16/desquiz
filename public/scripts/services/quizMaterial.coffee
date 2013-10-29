@@ -12,6 +12,7 @@ angular.module('deskQuizApp.quizMaterial.service', [])
         deferred.resolve data
       .error (err, status, headers, config) ->
         console.log err
+        deferred.reject err
 
       deferred.promise
 

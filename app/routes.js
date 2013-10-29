@@ -6,17 +6,39 @@ var path = require('path');
 module.exports = function(app) {
   app.get('/', function(req, res, next) {
     res.type('html');
-    res.render('index.html');
+    var cookie = req.cookies['connect.sid'];
+    User.findOne({
+      'sid': cookie
+    }, function(err, user) {
+      if(user) {
+        res.render('index.html');
+      } else if(!user) {
+        res.redirect('/login');
+      } else if(err) {
+        res.send(err);
+      }
+    });
   });
 
   app.get('/login', function(req, res, next) {
     res.type('html');
-    res.render('login.html');
+    var cookie = req.cookies['connect.sid'];
+    User.findOne({
+      'sid': cookie
+    }, function(err, user) {
+      if(user) {
+        res.redirect('/');
+      } else if(!user) {
+        res.render('login.html');
+      } else if(err) {
+        res.send(err);
+      }
+    });
   });
 
   app.post('/login', function(req, res, next) {
     User.findOne({
-      'email': req.body.email
+      'sid': req.cookies['connect.sid']
     }, function(err, user) {
       if(!user) {
         user = new User({
@@ -38,12 +60,29 @@ module.exports = function(app) {
         res.send('error', err);
       }
     });
-  })
+  });
+
+  app.get('/logout', function(req, res, next) {
+    var cookie = req.cookies['connect.sid'];
+    User.findOne({
+      'sid': cookie
+    }, function(err, user) {
+      if(user) {
+        user.sid = null;
+        user.save(function(err) {
+          if(err) res.send(err);
+          res.redirect('/login');
+        });
+      } else if(err) {
+        res.send(err);
+      }
+    });
+  });
 
   app.get('/quiz', function (req, res, next) {
     Question.find({}, function(err, questions) {
       if(err) {
-        throw err;
+        res.send(err);
       } else if(questions) {
         res.send(questions);
       }
@@ -77,26 +116,26 @@ module.exports = function(app) {
     })
   });
 
-  app.post('/user', function(req, res, next) {
-    User.findOne({
-      'email': req.body.username
-    }, function(err, user) {
-      if(err) {
-        throw err;
-      } else if(!user) {
-        user = new User({
-          email: req.body.username,
-          password: req.body.pass
-        });
-        user.save(function(err) {
-          if(err) throw err;
-          res.send(user._id);
-        });
-      } else {
-        res.send(user._id);
-      }
-    });
-  });
+  // app.post('/user', function(req, res, next) {
+  //   User.findOne({
+  //     'email': req.body.username
+  //   }, function(err, user) {
+  //     if(err) {
+  //       throw err;
+  //     } else if(!user) {
+  //       user = new User({
+  //         email: req.body.username,
+  //         password: req.body.pass
+  //       });
+  //       user.save(function(err) {
+  //         if(err) throw err;
+  //         res.send(user._id);
+  //       });
+  //     } else {
+  //       res.send(user._id);
+  //     }
+  //   });
+  // });
 
 };
 

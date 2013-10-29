@@ -11,7 +11,8 @@
           console.log(data);
           return deferred.resolve(data);
         }).error(function(err, status, headers, config) {
-          return console.log(err);
+          console.log(err);
+          return deferred.reject(err);
         });
         return deferred.promise;
       };

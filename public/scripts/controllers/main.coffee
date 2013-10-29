@@ -48,5 +48,7 @@ angular.module('deskQuizApp.main.controller', [])
         question: $scope.questions[$scope.active]._id
       nextQuestion()
 
+    $scope.logout = () ->
+      user.logout()
 
   ]

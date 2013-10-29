@@ -46,3 +46,8 @@ body {
   display: block;
   margin: 5px 0px !important;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000346}}
+.logout {
+  float: right;
+}

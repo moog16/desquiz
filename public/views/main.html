@@ -14,4 +14,6 @@
     <input type='text' class='topcoat-text-input--large oneLine' placeholder='Answer' ng-repeat='i in makeArray(questions[active].answers)' required>
     <button ng-click='submitFillin()' class='topcoat-button--large' ng-disabled='!fillinForm.$valid'>Next</button>
   </form>
+
+  <button ng-click='logout()' class='topcoat-button--quiet logout'>Logout</button>
 </div>

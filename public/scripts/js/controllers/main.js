@@ -41,7 +41,7 @@
         });
         return nextQuestion();
       };
-      return $scope.submitFillin = function() {
+      $scope.submitFillin = function() {
         var answer, answerArr, answers, _i, _len;
         $scope.validAnswer = true;
         answerArr = [];
@@ -55,6 +55,9 @@
           question: $scope.questions[$scope.active]._id
         });
         return nextQuestion();
+      };
+      return $scope.logout = function() {
+        return user.logout();
       };
     }
   ]);
