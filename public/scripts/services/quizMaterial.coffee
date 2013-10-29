@@ -8,6 +8,7 @@ angular.module('deskQuizApp.quizMaterial.service', [])
       deferred = $q.defer()
       $http.get(url + resource)
       .success (data, status, headers, config) ->
+        console.log data
         deferred.resolve data
       .error (err, status, headers, config) ->
         console.log err

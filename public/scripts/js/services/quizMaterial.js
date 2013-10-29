@@ -8,6 +8,7 @@
         var deferred;
         deferred = $q.defer();
         $http.get(url + resource).success(function(data, status, headers, config) {
+          console.log(data);
           return deferred.resolve(data);
         }).error(function(err, status, headers, config) {
           return console.log(err);

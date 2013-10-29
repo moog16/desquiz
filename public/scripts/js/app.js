@@ -2,7 +2,7 @@
   'use strict';
   var deskQuizApp;
 
-  deskQuizApp = angular.module('deskQuizApp', ['deskQuizApp.main.controller', 'deskQuizApp.results.controller', 'deskQuizApp.login.controller', 'deskQuizApp.quizMaterial.service', 'deskQuizApp.user.service', 'ngCookies']);
+  deskQuizApp = angular.module('deskQuizApp', ['deskQuizApp.main.controller', 'deskQuizApp.results.controller', 'deskQuizApp.quizMaterial.service', 'deskQuizApp.user.service', 'ngCookies']);
 
   deskQuizApp.config(function($routeProvider) {
     return $routeProvider.when('/', {
@@ -12,7 +12,7 @@
       templateUrl: 'views/results.html',
       controller: 'ResultsCtrl'
     }).otherwise({
-      redirectTo: '/login'
+      redirectTo: '/'
     });
   });
 

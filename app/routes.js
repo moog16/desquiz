@@ -51,9 +51,8 @@ module.exports = function(app) {
   });
 
   app.post('/results', function(req, res, next) {
-    console.log(req.cookies);
     User.findOne({
-      '_id': req.body.id
+      'sid': req.cookies['connect.sid']
     }, function(err, user) {
       if(user) {
         user.quizResults = req.body.results;
@@ -61,10 +60,21 @@ module.exports = function(app) {
           res.send(user._id);
         });
       } else if (err) {
-        throw err;
-        res.send('success');
+        res.send('error', err);
       }
     });
+  });
+
+  app.get('/results', function(req, res, next) {
+    User.findOne({
+      'sid': req.cookies['connect.sid']
+    }, function(err, user) {
+      if(user) {
+        res.send(user.quizResults);
+      } else if (err) {
+        res.send('error', err);
+      }
+    })
   });
 
   app.post('/user', function(req, res, next) {

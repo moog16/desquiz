@@ -29,7 +29,7 @@ angular.module('deskQuizApp.main.controller', [])
           $scope.validAnswer = !$scope.validAnswer
         else
           quizMaterial.postAnswers quizTaker
-          # $location.path '/results'
+          $location.path '/results'
 
     $scope.submitAnswer = ->
       quizTaker.results.push

@@ -3,7 +3,6 @@
 deskQuizApp = angular.module 'deskQuizApp', [
   'deskQuizApp.main.controller'
   'deskQuizApp.results.controller'
-  'deskQuizApp.login.controller'
   'deskQuizApp.quizMaterial.service'
   'deskQuizApp.user.service'
   'ngCookies'
@@ -18,4 +17,4 @@ deskQuizApp.config ($routeProvider) ->
         templateUrl: 'views/results.html'
         controller: 'ResultsCtrl'
       .otherwise
-        redirectTo: '/login'
+        redirectTo: '/'

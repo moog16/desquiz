@@ -29,7 +29,8 @@
             $scope.active++;
             return $scope.validAnswer = !$scope.validAnswer;
           } else {
-            return quizMaterial.postAnswers(quizTaker);
+            quizMaterial.postAnswers(quizTaker);
+            return $location.path('/results');
           }
         }
       };
