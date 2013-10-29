@@ -5,7 +5,7 @@ module.exports = function() {
   var UserSchema = new Schema ({
     email: String,
     password: String,
-    quizResults: {}
+    quizResults: []
   });
 
   return mongoose.model('User', UserSchema);

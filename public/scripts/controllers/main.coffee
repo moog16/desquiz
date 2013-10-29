@@ -1,12 +1,12 @@
 'use strict'
 
 angular.module('deskQuizApp.main.controller', [])
-  .controller 'MainCtrl', ['$scope', 'quizMaterial', '$location', 'user', ($scope, quizMaterial, $location, user) ->
-    quizTaker = {}
-    # if !user.loggedIn()
-    #   console.log('yolo')
-    #   $location.path '/login'
+  .controller 'MainCtrl', ['$scope', 'quizMaterial', '$location', 'user', '$cookies', ($scope, quizMaterial, $location, user, $cookies) ->
+    if !$cookies.userCookie
+      console.log('yolo')
+      $location.path '/login'
 
+    quizTaker = {}
     quizTaker.id = user.id
     quizTaker.results = []
 

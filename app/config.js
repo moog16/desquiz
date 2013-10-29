@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
     app.use(express.favicon());
-    app.use(express.static(path.join(__dirname,'/../public')));
+    app.use(express.static(path.join(__dirname, '/../public')));
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());

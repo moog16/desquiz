@@ -4,17 +4,10 @@ var User = mongoose.model('User');
 var path = require('path');
 
 module.exports = function(app) {
-  // app.get('/*', function(req, res, next) {
-  //   res.type('.html');
-  //   res.render('index.html');
-  //   // res.send(path.join(__dirname, '/../public/index.html'));
-  // });
-
-  // app.get('/', function(req, res, next) {
-  //   res.type('.html');
-  //   res.render('index.html');
-  // });
-
+  app.get('/', function(req, res, next) {
+    res.type('html');
+    res.render('index.html');
+  });
   app.get('/quiz', function (req, res, next) {
     Question.find({}, function(err, questions) {
       if(err) {
@@ -26,19 +19,19 @@ module.exports = function(app) {
   });
 
   app.post('/results', function(req, res, next) {
-    console.log(req.body);
     User.findOne({
       '_id': req.body.id
     }, function(err, user) {
       if(user) {
-        console.log(user);
-        res.send(req.body.results);
-        // user.quizResults
+        user.quizResults = req.body.results;
+        user.save(function(err) {
+          res.send(user._id);
+        });
       } else if (err) {
         throw err;
+        res.send('success');
       }
     });
-    res.send('success');
   });
 
   app.post('/user', function(req, res, next) {

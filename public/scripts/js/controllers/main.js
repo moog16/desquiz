@@ -1,8 +1,12 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.main.controller', []).controller('MainCtrl', [
-    '$scope', 'quizMaterial', '$location', 'user', function($scope, quizMaterial, $location, user) {
+    '$scope', 'quizMaterial', '$location', 'user', '$cookies', function($scope, quizMaterial, $location, user, $cookies) {
       var nextQuestion, quizTaker;
+      if (!$cookies.userCookie) {
+        console.log('yolo');
+        $location.path('/login');
+      }
       quizTaker = {};
       quizTaker.id = user.id;
       quizTaker.results = [];
