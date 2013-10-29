@@ -2,17 +2,12 @@
   'use strict';
   angular.module('deskQuizApp.main.controller', []).controller('MainCtrl', [
     '$scope', 'server', '$location', 'user', function($scope, server, $location, user) {
-      var promise, quizTaker;
+      var quizTaker;
       quizTaker = {};
-      if (user.loggedIn()) {
-        quizTaker.id = user.loggedIn();
-      } else {
-        $location.path('/login');
-      }
+      quizTaker.id = user.id;
       quizTaker.results = [];
       $scope.active = 0;
-      promise = server.getQuestions();
-      promise.then(function(questions) {
+      server.getQuestions().then(function(questions) {
         return $scope.questions = questions;
       });
       $scope.checkRadio = function(answer) {

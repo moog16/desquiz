@@ -4,11 +4,16 @@ var User = mongoose.model('User');
 var path = require('path');
 
 module.exports = function(app) {
+  // app.get('/*', function(req, res, next) {
+  //   res.type('.html');
+  //   res.render('index.html');
+  //   // res.send(path.join(__dirname, '/../public/index.html'));
+  // });
 
-  app.get('/', function(req, res, next) {
-    res.type('.html');
-    res.render('index.html');
-  });
+  // app.get('/', function(req, res, next) {
+  //   res.type('.html');
+  //   res.render('index.html');
+  // });
 
   app.get('/quiz', function (req, res, next) {
     Question.find({}, function(err, questions) {
@@ -49,6 +54,7 @@ module.exports = function(app) {
       }
     });
   });
+
 };
 
 

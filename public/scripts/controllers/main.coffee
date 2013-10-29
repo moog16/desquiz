@@ -3,17 +3,17 @@
 angular.module('deskQuizApp.main.controller', [])
   .controller 'MainCtrl', ['$scope', 'server', '$location', 'user', ($scope, server, $location, user) ->
     quizTaker = {}
-    if user.loggedIn()
-      quizTaker.id = user.loggedIn()
-    else
-      $location.path '/login'
+    # if !user.loggedIn()
+    #   console.log('yolo')
+    #   $location.path '/login'
 
+    quizTaker.id = user.id
     quizTaker.results = []
 
     $scope.active = 0
 
-    promise = server.getQuestions()
-    promise.then (questions) ->
+    server.getQuestions()
+    .then (questions) ->
       $scope.questions = questions
 
     $scope.checkRadio = (answer) ->
