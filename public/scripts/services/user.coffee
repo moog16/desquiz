@@ -13,6 +13,7 @@ angular.module('deskQuizApp.user.service', [])
       $http.post('/user', loginCred)
       .success (newUser, status, headers, config) ->
         # $cookies.userCookie = newUser._id
+        console.log(newUser)
       .error (err, status, headers, config) ->
         console.log err
 

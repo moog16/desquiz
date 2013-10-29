@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
+var User = mongoose.model('User');
 var path = require('path');
 
 module.exports = function(app) {
@@ -29,26 +30,26 @@ module.exports = function(app) {
   });
 
   app.post('/user', function(req, res, next) {
-    var user = req.body;
-    console.log(user);
-    res.send('user save ');
-    // User.findOne({
-    //   'email': user.
-    // }, function(err, user) {
-    //   if(!user) {
-    //     user = new User({
-    //       name: user
-    //     })
-    //   }
-    // });
+    User.findOne({
+      'email': req.body.username
+    }, function(err, user) {
+      if(err) {
+        throw err;
+      } else if(!user) {
+        user = new User({
+          email: req.body.username,
+          password: req.body.pass
+        });
+        user.save(function(err) {
+          if(err) throw err;
+          res.send(user._id);
+        });
+      } else {
+        res.send(user._id);
+      }
+    });
   });
 };
-  // var UserSchema = new Schema ({
-  //   name: String,
-  //   email: String,
-  //   password: String,
-  //   quizResults: {}
-  // });
 
 
 
