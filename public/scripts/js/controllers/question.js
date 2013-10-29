@@ -56,8 +56,12 @@
         });
         return nextQuestion();
       };
-      return $scope.logout = function() {
+      $scope.logout = function() {
         return user.logout();
+      };
+      return $scope.gotoResults = function() {
+        console.log('results');
+        return $location.path('/results');
       };
     }
   ]);

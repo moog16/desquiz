@@ -51,4 +51,8 @@ angular.module('deskQuizApp.question.controller', [])
     $scope.logout = () ->
       user.logout()
 
+    $scope.gotoResults = () ->
+      console.log 'results'
+      $location.path '/results'
+
   ]
