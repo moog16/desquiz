@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.login.controller', []).controller('LoginCtrl', [
-    '$scope', 'user', function($scope, user) {
+    '$scope', 'user', '$location', function($scope, user, $location) {
       if (user.loggedIn()) {
         $location.path('/');
       }
