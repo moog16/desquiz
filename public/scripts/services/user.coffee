@@ -1,10 +1,13 @@
 'use strict'
 
-angular.module('deskQuizApp.login.service', [])
-  .factory 'user', ['$cookies', '$q', ($cookies, $q) ->
+angular.module('deskQuizApp.user.service', [])
+  .factory 'user', ['$cookies', '$location', ($cookies, $location) ->
 
     loggedIn = () ->
-      if 
+      if $scookies.userCookie
+        $location.path '/'
+      else
+        $location.path '/login'
 
     loggedIn: loggedIn
   ]

@@ -1,11 +1,12 @@
 'use strict'
 
 angular.module('deskQuizApp.main.controller', [])
-  .controller 'MainCtrl', ['$scope', 'server', '$location', ($scope, server, $location) ->
+  .controller 'MainCtrl', ['$scope', 'server', '$location', 'user', ($scope, server, $location, user) ->
+    user = {}
+    user.id = user.loggedIn()
+    user.results = []
 
     $scope.active = 0
-    user = {}
-    user.results = []
 
     promise = server.getQuestions()
     promise.then (questions) ->
