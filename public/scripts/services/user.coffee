@@ -1,13 +1,13 @@
 'use strict'
 
 angular.module('deskQuizApp.user.service', [])
-  .factory 'user', ['$http', '$location', ($http, $location) ->
+  .factory 'user', ['$http', ($http) ->
     logout : () ->
       url = 'http://localhost:9000'
-      $http.post(url+'/logout')
+      $http.get(url+'/logout')
       .success (data, status, headers, config) ->
         console.log data
-        $location.path '/'
+        window.location.reload()
       .error (err, status, headers, config) ->
         console.log err
   ]

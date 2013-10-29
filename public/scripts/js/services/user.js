@@ -1,14 +1,14 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.user.service', []).factory('user', [
-    '$http', '$location', function($http, $location) {
+    '$http', function($http) {
       return {
         logout: function() {
           var url;
           url = 'http://localhost:9000';
-          return $http.post(url + '/logout').success(function(data, status, headers, config) {
+          return $http.get(url + '/logout').success(function(data, status, headers, config) {
             console.log(data);
-            return $location.path('/');
+            return window.location.reload();
           }).error(function(err, status, headers, config) {
             return console.log(err);
           });

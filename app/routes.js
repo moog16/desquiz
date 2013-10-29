@@ -62,7 +62,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/logout', function(req, res, next) {
+  app.get('/logout', function(req, res, next) {
     var cookie = req.cookies['connect.sid'];
     User.findOne({
       'sid': cookie
