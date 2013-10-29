@@ -1,0 +1,55 @@
+[
+  {
+      "type" : "multi",
+      "question" : "To pass an array of strings to a function, you should not use...",
+      "answers" : [ 
+          "fn.apply(this, stringsArray)", 
+          "fn.call(this, stringsArray)", 
+          "fn.bind(this, stringsArray)"
+      ],
+      "correctAnswer" : "2"
+  },
+  {
+      "type" : "multi",
+      "question" : "Given this: \n \t angular.module(‘myModule’).service(‘myService’,function() { \n\t\tvar message = “Message one!”\n var getMessage = function() {\nreturn this.message\n};this.message = “Message two!”\nthis.getMessage = function() { return message }\nfunction() {\n{\ngetMessage: getMessage,\nmessage: “Message three!”\n};\n};\n};\nWhich message will be returned by injecting this service and executing “myService.getMessage()”",
+      "answers" : [ 
+          1, 
+          2, 
+          3
+      ],
+      "correctAnswer" : "0"
+  },
+  {
+      "type" : "multi",
+      "question" : "Which is not an advantage of using a closure?",
+      "answers" : [ 
+          "Prevent pollution of global scope", 
+          "Encapsulation", 
+          "Private properties and methods", 
+          "Allow conditional use of ‘strict mode’"
+      ],
+      "correctAnswer" : "3"
+  },
+  {
+      "type" : "multi",
+      "question" : "To create a columned list of two­line email subjects and dates for a master­detail view, which are the most semantically correct?",
+      "answers" : [ 
+          "<div>+<span>", 
+          "<tr>+<td>", 
+          "<ul>+<li>", 
+          "<p>+<br>", 
+          "none of these", 
+          "all of these"
+      ],
+      "correctAnswer" : "2"
+  },
+  {
+      "type" : "fillin",
+      "question" : "____ and ____ would be the HTML tags you would use to display a menu item and its description.",
+      "answers" : [ 
+          2
+      ],
+      "correctAnswer" : "[\"menu\", \"menuitem\"]",
+      "__v" : 0
+  }
+]
