@@ -26,10 +26,17 @@ module.exports = function(app) {
   });
 
   app.post('/results', function(req, res, next) {
+    console.log(req.body);
     User.findOne({
-      '_id': req.body._id
+      '_id': req.body.id
     }, function(err, user) {
-
+      if(user) {
+        console.log(user);
+        res.send(req.body.results);
+        // user.quizResults
+      } else if (err) {
+        throw err;
+      }
     });
     res.send('success');
   });

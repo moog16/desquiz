@@ -29,7 +29,7 @@
             $scope.active++;
             return $scope.validAnswer = !$scope.validAnswer;
           } else {
-            quizMaterial.postAnswers(quizTaker.results);
+            quizMaterial.postAnswers(quizTaker);
             return $location.path('/results');
           }
         }

@@ -14,8 +14,8 @@ angular.module('deskQuizApp.quizMaterial.service', [])
 
       deferred.promise
 
-    postAnswers = () ->
-      $http.post(url + '/results')
+    postAnswers = (quizTakerResults) ->
+      $http.post(url + '/results', quizTakerResults)
       .success (data, status, headers, config) ->
         console.log data
       .error (err, status, headers, config) ->
