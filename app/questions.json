@@ -44,12 +44,20 @@
       "correctAnswer" : "2"
   },
   {
+      "type" : "multi",
+      "question" : "Given <div id=”outer”><div class=”inner”></div></div>, which of these two is the most performant way to select the inner div?",
+      "answers" : [ 
+          "getElementById(\"outer\").children[0]",
+          "getElementsByClassName(\"inner\")[0]"
+      ],
+      "correctAnswer" : "0"
+  },
+  {
       "type" : "fillin",
       "question" : "____ and ____ would be the HTML tags you would use to display a menu item and its description.",
       "answers" : [ 
           2
       ],
-      "correctAnswer" : "[\"menu\", \"menuitem\"]",
-      "__v" : 0
+      "correctAnswer" : "[\"menu\", \"menuitem\"]"
   }
 ]

@@ -14,6 +14,16 @@ angular.module('deskQuizApp.results.controller', [])
     $scope.logout = () ->
       user.logout()
 
+    checkFillin = (result, questions) ->
+      questions =  JSON.parse questions.correctAnswer
+      for result in result.answer
+        do () ->
+          if questions.indexOf result is -1
+            false
+      true
+
+
+
     questionAnswerMap = (results, questions) ->
       newResults = []
       for result in results
@@ -28,7 +38,10 @@ angular.module('deskQuizApp.results.controller', [])
                 correctAnswerInd = question.correctAnswer
                 correctAnswer = question.answers[correctAnswerInd]
                 correct = false
-                if result.answer is correctAnswer
+                if question.type is 'fillin'
+                  correct = checkFillin result, question
+                  correctAnswer = JSON.parse questions.correctAnswer
+                else if result.answer is correctAnswer
                   $scope.correct++
                   correct = true
 
