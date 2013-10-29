@@ -3,29 +3,6 @@ var Question = mongoose.model('Question');
 var User = mongoose.model('User');
 var path = require('path');
 
-var questionAnswerMapper = function(results) {
-  // var newResult = [];
-  // for(var i=0; i<results.length; i++) {
-  //   Question.findOne({
-  //     '_id': results[i].question
-  //   }, function(err, question) {
-  //     var correct;
-  //     if(question.type === 'multi') {
-  //       correct = question.answers[question.correctAnswer];
-  //     } else if(question.type === 'fillin') {
-  //       correct = question.correctAnswer;
-  //     }
-  //     console.log(results[i]);
-  //     newResult.push({
-  //       answer: results[i].answer,
-  //       question: question.question,
-  //       correctAnswer: correct
-  //     });
-  //   });
-  // }
-  // return newResult;
-};
-
 module.exports = function(app) {
   app.get('/', function(req, res, next) {
     res.type('html');

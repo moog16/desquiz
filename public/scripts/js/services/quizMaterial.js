@@ -2,13 +2,13 @@
   'use strict';
   angular.module('deskQuizApp.quizMaterial.service', []).factory('quizMaterial', [
     '$http', '$q', function($http, $q) {
-      var getQuestions, getReq, getResults, postAnswers, savedQuestions, url;
+      var getQuestions, getReq, getResults, postAnswers, url;
       url = 'http://localhost:9000';
-      savedQuestions = null;
       getReq = function(resource) {
         var deferred;
         deferred = $q.defer();
         $http.get(url + resource).success(function(data, status, headers, config) {
+          var savedQuestions;
           console.log(data);
           if (resource === '/quiz') {
             savedQuestions = data;
@@ -28,11 +28,7 @@
         });
       };
       getQuestions = function() {
-        if (!savedQuestions) {
-          return getReq('/quiz');
-        } else {
-          return savedQuestions;
-        }
+        return getReq('/quiz');
       };
       getResults = function() {
         return getReq('/results');

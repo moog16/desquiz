@@ -3,7 +3,7 @@
 angular.module('deskQuizApp.quizMaterial.service', [])
   .factory 'quizMaterial', ['$http', '$q', ($http, $q) ->
     url = 'http://localhost:9000'
-    savedQuestions = null
+    # savedQuestions = null
 
     getReq = (resource) ->
       deferred = $q.defer()
@@ -26,10 +26,10 @@ angular.module('deskQuizApp.quizMaterial.service', [])
         console.log err, 'error'
 
     getQuestions = () ->
-      if !savedQuestions
-        getReq '/quiz'
-      else
-        savedQuestions
+      # if !savedQuestions
+      getReq '/quiz'
+      # else
+        # savedQuestions
     
     getResults = () ->
       getReq '/results'
