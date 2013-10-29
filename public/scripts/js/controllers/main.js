@@ -43,6 +43,7 @@
       };
       return $scope.submitFillin = function() {
         var answer, answerArr, answers, _i, _len;
+        $scope.validAnswer = true;
         answerArr = [];
         answers = document.getElementsByClassName('oneLine');
         for (_i = 0, _len = answers.length; _i < _len; _i++) {

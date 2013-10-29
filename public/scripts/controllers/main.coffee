@@ -42,6 +42,7 @@ angular.module('deskQuizApp.main.controller', [])
 
 
     $scope.submitFillin = () ->
+      $scope.validAnswer = true
       answerArr = []
       answers = document.getElementsByClassName 'oneLine'
       answerArr.push answer.value for answer in answers 
