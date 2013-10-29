@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.results.controller', []).controller('ResultsCtrl', [
-    '$scope', 'server', function($scope, server) {
-      return server.getResults;
+    '$scope', 'quizMaterial', function($scope, quizMaterial) {
+      return quizMaterial.getResults;
     }
   ]);
 

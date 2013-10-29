@@ -1,7 +1,7 @@
 'use strict'
 
-angular.module('deskQuizApp.server.service', [])
-  .factory 'server', ['$http', '$q', ($http, $q) ->
+angular.module('deskQuizApp.quizMaterial.service', [])
+  .factory 'quizMaterial', ['$http', '$q', ($http, $q) ->
     url = 'http://localhost:9000'
 
     getReq = (resource) ->
@@ -14,7 +14,7 @@ angular.module('deskQuizApp.server.service', [])
 
       deferred.promise
 
-    sendAnswers = () ->
+    postAnswers = () ->
       $http.post(url + '/results')
       .success (data, status, headers, config) ->
         console.log data
@@ -27,7 +27,7 @@ angular.module('deskQuizApp.server.service', [])
     getResults = () ->
       getReq '/results'
 
-    sendAnswers: sendAnswers
+    postAnswers: postAnswers
     getQuestions: getQuestions
     getResults: getResults
   ]

@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  angular.module('deskQuizApp.server.service', []).factory('server', [
+  angular.module('deskQuizApp.quizMaterial.service', []).factory('quizMaterial', [
     '$http', '$q', function($http, $q) {
-      var getQuestions, getReq, getResults, sendAnswers, url;
+      var getQuestions, getReq, getResults, postAnswers, url;
       url = 'http://localhost:9000';
       getReq = function(resource) {
         var deferred;
@@ -14,7 +14,7 @@
         });
         return deferred.promise;
       };
-      sendAnswers = function() {
+      postAnswers = function() {
         return $http.post(url + '/results').success(function(data, status, headers, config) {
           return console.log(data);
         }).error(function(err, status, headers, config) {
@@ -28,7 +28,7 @@
         return getReq('/results');
       };
       return {
-        sendAnswers: sendAnswers,
+        postAnswers: postAnswers,
         getQuestions: getQuestions,
         getResults: getResults
       };

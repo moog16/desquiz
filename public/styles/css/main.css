@@ -1,42 +1,48 @@
 /* Put your CSS here */
-/* line 5, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\000035}}
 html, body {
   margin: 20px;
 }
 
-/* line 9, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\000039}}
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
-/* line 15, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000315}}
 .hero-unit {
   margin: 50px auto 0 auto;
-  width: 300px;
+  width: 470px;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
   background-color: #eee;
   border-radius: 6px;
-  padding: 60px;
+  padding: 30px;
 }
 
-/* line 26, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000326}}
 .hero-unit h1 {
   font-size: 60px;
   line-height: 1;
   letter-spacing: -1px;
 }
 
-/* line 32, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000332}}
 .questionText {
   margin: 20px 0px;
 }
 
-/* line 36, ../main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000336}}
 .radioButton {
   display: block !important;
   margin: 10px 0px !important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000341}}
+.oneLine {
+  display: block;
+  margin: 5px 0px !important;
 }

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('deskQuizApp.main.controller', [])
-  .controller 'MainCtrl', ['$scope', 'server', '$location', 'user', ($scope, server, $location, user) ->
+  .controller 'MainCtrl', ['$scope', 'quizMaterial', '$location', 'user', ($scope, quizMaterial, $location, user) ->
     quizTaker = {}
     # if !user.loggedIn()
     #   console.log('yolo')
@@ -12,7 +12,7 @@ angular.module('deskQuizApp.main.controller', [])
 
     $scope.active = 0
 
-    server.getQuestions()
+    quizMaterial.getQuestions()
     .then (questions) ->
       $scope.questions = questions
 
@@ -28,11 +28,10 @@ angular.module('deskQuizApp.main.controller', [])
       if $scope.active < $scope.questions.length-1
         $scope.active++
       else
-        server.sendAnswers quizTaker.results
+        quizMaterial.postAnswers quizTaker.results
         $location.path '/results'
 
-      # $http.post(url + '/submitQA', answer)
-      # .success (data) ->
-      #   console.log data
+    $scope.makeArray = (size) ->
+      new Array parseInt(size)
 
   ]

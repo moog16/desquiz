@@ -2,7 +2,7 @@
   <div class="questionText">{{questions[active].question}}</div>
   <form ng-show='questions[active].type == "multi"'>
     <label class='topcoat-radio-button radioButton' ng-repeat='answer in questions[active].answers'>
-      <input type='radio' name='topcoat' ng-click='checkRadio(answer)'>
+      <input type='radio' ng-click='checkRadio(answer)'>
       <div class='topcoat-radio-button__checkmark'></div>
       {{answer}}
     </label>
@@ -11,10 +11,7 @@
 
 
   <form ng-show='questions[active].type == "fillin"'>
-    <label class='topcoat-radio-button' ng-repeat='answer in questions[active].answers'>
-      <input type='radio' name='topcoat'>
-      <div class='topcoat-radio-button__checkmark'></div>
-      {{answer}}
-    </label>
+    <input type='text' class='topcoat-text-input--large oneLine' placeholder='Answer' ng-repeat='i in makeArray(questions[active].answers)'>
+    <button class='topcoat-button--large'>Next</button>
   </form>
 </div>
