@@ -14,7 +14,8 @@
         return console.log(loginCred);
       };
       return {
-        loggedIn: loggedIn
+        loggedIn: loggedIn,
+        setLogin: setLogin
       };
     }
   ]);
