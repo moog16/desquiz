@@ -20,12 +20,14 @@
         }
       };
       nextQuestion = function() {
-        if ($scope.active < $scope.questions.length - 1) {
-          $scope.active++;
-          return console.log($scope.renderQuestion);
-        } else {
-          quizMaterial.postAnswers(quizTaker.results);
-          return $location.path('/results');
+        if ($scope.validAnswer) {
+          if ($scope.active < $scope.questions.length - 1) {
+            $scope.active++;
+            return $scope.validAnswer = !$scope.validAnswer;
+          } else {
+            quizMaterial.postAnswers(quizTaker.results);
+            return $location.path('/results');
+          }
         }
       };
       $scope.submitAnswer = function() {

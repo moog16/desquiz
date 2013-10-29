@@ -1,5 +1,5 @@
 <div class='hero-unit'>
-  <div class="questionText">{{questions[$scope.active].question}}</div>
+  <div class="questionText">{{questions[active].question}}</div>
   <form ng-show='questions[active].type == "multi"'>
     <label class='topcoat-radio-button radioButton' ng-repeat='answer in questions[active].answers'>
       <input type='radio' ng-click='checkRadio(answer)'>

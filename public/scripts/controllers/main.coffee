@@ -25,13 +25,14 @@ angular.module('deskQuizApp.main.controller', [])
       if typeof size is 'string' then new Array parseInt(size)
 
     nextQuestion = ->
-      if $scope.active < $scope.questions.length-1
-        $scope.active++
-        # $scope.renderQuestion = $scope.questions[$scope.active].question.replace('\n', '<p>')
-        console.log $scope.renderQuestion
-      else
-        quizMaterial.postAnswers quizTaker.results
-        $location.path '/results'
+      if $scope.validAnswer
+        if $scope.active < $scope.questions.length-1
+          $scope.active++
+          # $scope.renderQuestion = $scope.questions[$scope.active].question.replace('\n', '<p>')
+          $scope.validAnswer = !$scope.validAnswer
+        else
+          quizMaterial.postAnswers quizTaker.results
+          $location.path '/results'
 
     $scope.submitAnswer = ->
       quizTaker.results.push
