@@ -8,22 +8,21 @@
       quizTaker.results = [];
       $scope.active = 0;
       quizMaterial.getQuestions().then(function(questions) {
-        $scope.questions = questions;
-        return $scope.renderQuestion = questions[0].question.replace('\n', '<br>\n');
+        return $scope.questions = questions;
       });
       $scope.checkRadio = function(answer) {
         $scope.validAnswer = true;
         return $scope.answer = answer;
       };
       $scope.makeArray = function(size) {
-        if (size) {
+        if (typeof size === 'string') {
           return new Array(parseInt(size));
         }
       };
       nextQuestion = function() {
         if ($scope.active < $scope.questions.length - 1) {
           $scope.active++;
-          return $scope.renderQuestion = $scope.questions[$scope.active].question.replace('\n', '<br>\n');
+          return console.log($scope.renderQuestion);
         } else {
           quizMaterial.postAnswers(quizTaker.results);
           return $location.path('/results');
