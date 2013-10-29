@@ -19,7 +19,7 @@ angular.module('deskQuizApp.quizMaterial.service', [])
       .success (data, status, headers, config) ->
         console.log data
       .error (err, status, headers, config) ->
-        console.log err
+        console.log err, 'error'
 
     getQuestions = () ->
       getReq '/quiz'

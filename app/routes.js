@@ -15,7 +15,6 @@ module.exports = function(app) {
   });
 
   app.post('/login', function(req, res, next) {
-    console.log(req.body);
     User.findOne({
       'email': req.body.email
     }, function(err, user) {
@@ -49,6 +48,7 @@ module.exports = function(app) {
   });
 
   app.post('/results', function(req, res, next) {
+    console.log(req.cookies);
     User.findOne({
       '_id': req.body.id
     }, function(err, user) {

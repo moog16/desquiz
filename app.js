@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/deskQuiz');
 var app = express();
 
 // Configuration
-require(path.join(__dirname, '/app/config.js'))(app);
+require(path.join(__dirname, '/app/config.js'))(app, mongoose);
 
 // Models
 require(path.join(__dirname, '/app/models/user.js'))();

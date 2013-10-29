@@ -14,9 +14,6 @@ deskQuizApp.config ($routeProvider) ->
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
-      .when '/login',
-        templateUrl: 'views/login.html'
-        controller: 'LoginCtrl'
       .when '/results',
         templateUrl: 'views/results.html'
         controller: 'ResultsCtrl'

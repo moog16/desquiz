@@ -2,9 +2,6 @@
 
 angular.module('deskQuizApp.main.controller', [])
   .controller 'MainCtrl', ['$scope', 'quizMaterial', '$location', 'user', '$cookies', ($scope, quizMaterial, $location, user, $cookies) ->
-    if !$cookies.userCookie
-      console.log('yolo')
-      $location.path '/login'
 
     quizTaker = {}
     quizTaker.id = user.id
@@ -32,7 +29,7 @@ angular.module('deskQuizApp.main.controller', [])
           $scope.validAnswer = !$scope.validAnswer
         else
           quizMaterial.postAnswers quizTaker
-          $location.path '/results'
+          # $location.path '/results'
 
     $scope.submitAnswer = ->
       quizTaker.results.push
