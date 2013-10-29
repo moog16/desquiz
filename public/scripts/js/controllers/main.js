@@ -15,8 +15,12 @@
         return $scope.answer = answer;
       };
       $scope.makeArray = function(size) {
-        if (typeof size === 'string') {
-          return new Array(parseInt(size));
+        var type;
+        if ($scope.questions) {
+          type = $scope.questions[$scope.active].type;
+          if (type === 'fillin') {
+            return new Array(parseInt(size));
+          }
         }
       };
       nextQuestion = function() {
