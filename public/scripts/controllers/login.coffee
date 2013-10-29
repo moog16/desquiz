@@ -1,11 +1,8 @@
 'use strict'
 
 angular.module('deskQuizApp.login.controller', [])
-  .controller 'LoginCtrl', ['$scope', '$cookies', ($scope, $cookies) ->
-
-    if $cookies.userCookie
-      $location.path('/');
+  .controller 'LoginCtrl', ['$scope', 'user', ($scope, user) ->
 
     $scope.login = ->
-      
+
   ]

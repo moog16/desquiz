@@ -2,9 +2,13 @@
 
 angular.module('deskQuizApp.main.controller', [])
   .controller 'MainCtrl', ['$scope', 'server', '$location', 'user', ($scope, server, $location, user) ->
-    user = {}
-    user.id = user.loggedIn()
-    user.results = []
+    quizTaker = {}
+    if user.loggedIn()
+      quizTaker.id = user.loggedIn()
+    else
+      $location.path '/login'
+
+    quizTaker.results = []
 
     $scope.active = 0
 
@@ -17,14 +21,14 @@ angular.module('deskQuizApp.main.controller', [])
       $scope.answer = answer
 
     $scope.submitAnswer = ->
-      user.results.push
+      quizTaker.results.push
         answer: $scope.answer
         question: $scope.questions[$scope.active]._id
 
       if $scope.active < $scope.questions.length-1
         $scope.active++
       else
-        server.sendAnswers user.results
+        server.sendAnswers quizTaker.results
         $location.path '/results'
 
       # $http.post(url + '/submitQA', answer)

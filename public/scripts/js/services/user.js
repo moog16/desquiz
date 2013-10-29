@@ -2,14 +2,15 @@
   'use strict';
   angular.module('deskQuizApp.user.service', []).factory('user', [
     '$cookies', '$location', function($cookies, $location) {
-      var loggedIn;
+      var loggedIn, setLogin;
       loggedIn = function() {
-        if ($scookies.userCookie) {
-          return $location.path('/');
+        if ($cookies.userCookie) {
+          return $cookies.userCookie;
         } else {
-          return $location.path('/login');
+          return false;
         }
       };
+      setLogin = function() {};
       return {
         loggedIn: loggedIn
       };
