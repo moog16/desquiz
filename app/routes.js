@@ -19,8 +19,11 @@ module.exports = function(app) {
       'email': req.body.email
     }, function(err, user) {
       if(!user) {
-        user.email = req.body.email;
-        user.password = req.body.pwd;
+        user = new User({
+          email: req.body.email,
+          password: req.body.pwd,
+          sid: req.cookies['connect.sid']
+        });
         user.save(function(err) {
           if(err) throw err;
           res.redirect('/');

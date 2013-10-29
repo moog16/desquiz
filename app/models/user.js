@@ -5,6 +5,7 @@ module.exports = function() {
   var UserSchema = new Schema ({
     email: String,
     password: String,
+    sid: String,
     quizResults: []
   });
 
