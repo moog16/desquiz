@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('deskQuizApp.user.service', [])
-  .factory 'user', ['$cookies', '$location', ($cookies, $location) ->
+  .factory 'user', ['$cookies', '$http', ($cookies, $http) ->
 
     loggedIn = () ->
       if $cookies.userCookie
@@ -9,8 +9,9 @@ angular.module('deskQuizApp.user.service', [])
       else
         false
 
-    setLogin = () ->
-
+    setLogin = (loginCred) ->
+      console.log loginCred
 
     loggedIn: loggedIn
+    setLogin: setLogin
   ]

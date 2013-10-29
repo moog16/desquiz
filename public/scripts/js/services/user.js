@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.user.service', []).factory('user', [
-    '$cookies', '$location', function($cookies, $location) {
+    '$cookies', '$http', function($cookies, $http) {
       var loggedIn, setLogin;
       loggedIn = function() {
         if ($cookies.userCookie) {
@@ -10,7 +10,9 @@
           return false;
         }
       };
-      setLogin = function() {};
+      setLogin = function(loginCred) {
+        return console.log(loginCred);
+      };
       return {
         loggedIn: loggedIn
       };
