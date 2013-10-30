@@ -127,4 +127,18 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/user', function(req, res, next) {
+    User.findOne({
+      'sid': req.cookies['connect.sid']
+    }, function(err, user) {
+      if(user) {
+        res.send(user)
+      } else if(err) {
+        res.send('error', err);
+      } else {
+        res.send('no user');
+      }
+    })
+  });
+
 };

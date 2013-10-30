@@ -1,13 +1,19 @@
 'use strict'
 
 angular.module('deskQuizApp.question.controller', [])
-  .controller 'QuestionCtrl', ['$scope', 'quizMaterial', '$location', 'user', '$cookies', ($scope, quizMaterial, $location, user, $cookies) ->
+  .controller 'QuestionCtrl', ['$scope', 'quizMaterial', '$location', 'user', ($scope, quizMaterial, $location, user) ->
 
     quizTaker = {}
     quizTaker.id = user.id
     quizTaker.results = []
 
     $scope.active = 0
+
+    user.info()
+    .then (userData) ->
+      debugger
+      if userData.answered
+        $scope.answered = userData
 
     quizMaterial.getQuestions()
     .then (questions) ->

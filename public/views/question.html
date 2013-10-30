@@ -2,7 +2,7 @@
   <div class="questionText">{{questions[active].question}}</div>
   <form ng-show='questions[active].type == "multi"' name='multiForm'>
     <label class='topcoat-radio-button radioButton' ng-repeat='answer in questions[active].answers'>
-      <input type='radio' ng-click='checkRadio(answer)'>
+      <input type='radio' name='radio' ng-click='checkRadio(answer)'>
       <div class='topcoat-radio-button__checkmark'></div>
       {{answer}}
     </label>
@@ -16,5 +16,5 @@
   </form>
 
   <button ng-click='logout()' class='topcoat-button--quiet logout'>Logout</button>
-  <button ng-click='gotoResults()' class='topcoat-button--quiet logout'>Results</button>
+  <button ng-click='gotoResults()' class='topcoat-button--quiet logout' ng-disabled='answered'>Results</button>
 </div>

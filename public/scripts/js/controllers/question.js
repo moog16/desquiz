@@ -1,12 +1,18 @@
 (function() {
   'use strict';
   angular.module('deskQuizApp.question.controller', []).controller('QuestionCtrl', [
-    '$scope', 'quizMaterial', '$location', 'user', '$cookies', function($scope, quizMaterial, $location, user, $cookies) {
+    '$scope', 'quizMaterial', '$location', 'user', function($scope, quizMaterial, $location, user) {
       var nextQuestion, quizTaker;
       quizTaker = {};
       quizTaker.id = user.id;
       quizTaker.results = [];
       $scope.active = 0;
+      user.info().then(function(userData) {
+        debugger;
+        if (userData.answered) {
+          return $scope.answered = userData;
+        }
+      });
       quizMaterial.getQuestions().then(function(questions) {
         return $scope.questions = questions;
       });
