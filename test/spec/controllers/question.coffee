@@ -78,7 +78,7 @@ describe 'Controller: QuestionCtrl', () ->
 
     $httpBackend.when('GET', url + '/quiz').respond mockQuestions
     $httpBackend.when('GET', url + '/user').respond mockUser
-    $httpBackend.when('POST', url + '/results').respond mockUser.quizResults
+    $httpBackend.when('POST', url + '/results').respond mockUser._id
 
     scope = $rootScope.$new()
     QuestionCtrl = $controller 'QuestionCtrl', {
@@ -173,4 +173,3 @@ describe 'Controller: QuestionCtrl', () ->
       newArray = scope.makeArray '5'
       expect(newArray[0]).toBe undefined
 
-  # describe ''
