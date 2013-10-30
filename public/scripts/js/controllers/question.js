@@ -8,10 +8,8 @@
       quizTaker.results = [];
       $scope.active = 0;
       user.info().then(function(userData) {
-        debugger;
-        if (userData.answered) {
-          return $scope.answered = userData;
-        }
+        $scope.answered = (userData.quizResults.length > 0 ? true : false);
+        return console.log($scope.answered);
       });
       quizMaterial.getQuestions().then(function(questions) {
         return $scope.questions = questions;

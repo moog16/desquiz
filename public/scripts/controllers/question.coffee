@@ -11,9 +11,8 @@ angular.module('deskQuizApp.question.controller', [])
 
     user.info()
     .then (userData) ->
-      debugger
-      if userData.answered
-        $scope.answered = userData
+      $scope.answered = (if userData.quizResults.length > 0 then true else false)
+      console.log $scope.answered
 
     quizMaterial.getQuestions()
     .then (questions) ->
