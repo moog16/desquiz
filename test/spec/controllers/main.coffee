@@ -94,6 +94,10 @@ describe 'Controller: QuestionCtrl', () ->
     expect(scope.questions.length).toBe 3
   it 'should look at first question on load', () ->
     expect(scope.active).toBe 0
+  it 'should initialize quizTaker.results', () ->
+    expect(Array.isArray scope.quizTaker.results).toBe true
+    expect(scope.quizTaker.results.length).toBe 0
+
 
   describe 'scope.validAnswer', () ->
     it 'should validate an answer has been selected if radio button has been checked', () ->
