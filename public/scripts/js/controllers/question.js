@@ -2,10 +2,10 @@
   'use strict';
   angular.module('deskQuizApp.question.controller', []).controller('QuestionCtrl', [
     '$scope', 'quizMaterial', '$location', 'user', function($scope, quizMaterial, $location, user) {
-      var nextQuestion, quizTaker;
-      quizTaker = {};
-      quizTaker.id = user.id;
-      quizTaker.results = [];
+      var nextQuestion;
+      $scope.quizTaker = {};
+      $scope.quizTaker.id = user.id;
+      $scope.quizTaker.results = [];
       $scope.active = 0;
       user.info().then(function(userData) {
         $scope.answered = (userData.quizResults.length > 0 ? true : false);
@@ -33,13 +33,13 @@
             $scope.active++;
             return $scope.validAnswer = !$scope.validAnswer;
           } else {
-            quizMaterial.postAnswers(quizTaker);
+            quizMaterial.postAnswers($scope.quizTaker);
             return $location.path('/results');
           }
         }
       };
       $scope.submitAnswer = function() {
-        quizTaker.results.push({
+        $scope.quizTaker.results.push({
           answer: $scope.answer,
           question: $scope.questions[$scope.active]._id
         });
@@ -54,7 +54,7 @@
           answer = answers[_i];
           answerArr.push(answer.value);
         }
-        quizTaker.results.push({
+        $scope.quizTaker.results.push({
           answer: answerArr,
           question: $scope.questions[$scope.active]._id
         });
@@ -64,7 +64,6 @@
         return user.logout();
       };
       return $scope.gotoResults = function() {
-        console.log('results');
         return $location.path('/results');
       };
     }

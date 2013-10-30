@@ -3,9 +3,9 @@
 angular.module('deskQuizApp.question.controller', [])
   .controller 'QuestionCtrl', ['$scope', 'quizMaterial', '$location', 'user', ($scope, quizMaterial, $location, user) ->
 
-    quizTaker = {}
-    quizTaker.id = user.id
-    quizTaker.results = []
+    $scope.quizTaker = {}
+    $scope.quizTaker.id = user.id
+    $scope.quizTaker.results = []
 
     $scope.active = 0
 
@@ -33,11 +33,11 @@ angular.module('deskQuizApp.question.controller', [])
           $scope.active++
           $scope.validAnswer = !$scope.validAnswer
         else
-          quizMaterial.postAnswers quizTaker
+          quizMaterial.postAnswers $scope.quizTaker
           $location.path '/results'
 
     $scope.submitAnswer = ->
-      quizTaker.results.push
+      $scope.quizTaker.results.push
         answer: $scope.answer
         question: $scope.questions[$scope.active]._id
       nextQuestion()
@@ -48,7 +48,7 @@ angular.module('deskQuizApp.question.controller', [])
       answerArr = []
       answers = document.getElementsByClassName 'oneLine'
       answerArr.push answer.value for answer in answers 
-      quizTaker.results.push
+      $scope.quizTaker.results.push
         answer: answerArr
         question: $scope.questions[$scope.active]._id
       nextQuestion()
@@ -57,7 +57,6 @@ angular.module('deskQuizApp.question.controller', [])
       user.logout()
 
     $scope.gotoResults = () ->
-      console.log 'results'
       $location.path '/results'
 
   ]
