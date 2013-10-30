@@ -1,11 +1,11 @@
 'use strict'
 
-describe 'Controller: MainCtrl', () ->
+describe 'Controller: QuestionCtrl', () ->
 
   # load the controller's module
   beforeEach module 'deskQuizApp'
 
-  MainCtrl = {}
+  QuestionCtrl = {}
   scope = {}
 
   # Initialize the controller and a mock scope
@@ -16,7 +16,7 @@ describe 'Controller: MainCtrl', () ->
     $httpBackend.when('GET', 'http://localhost:9000/quiz').respond(mockQuestions)
 
     scope = $rootScope.$new()
-    MainCtrl = $controller 'MainCtrl', {
+    QuestionCtrl = $controller 'QuestionCtrl', {
       $scope: scope
     }
     $httpBackend.flush()
@@ -25,8 +25,9 @@ describe 'Controller: MainCtrl', () ->
      $httpBackend.verifyNoOutstandingExpectation()
      $httpBackend.verifyNoOutstandingRequest()
 
-  it 'should attach a list of awesomeThings to the scope', () ->
-    expect(scope.questions.length).toBe 1
-  it 'should ', () ->
-    
+  # it 'should attach a list of awesomeThings to the scope', () ->
+  #   expect(scope.questions.length).toBe 1
+  it 'should validate a radio button has been checked', () ->
+    scope.checkRadio 'this would be an answer'
+    expect(scope.validAnswer).toBe true
 

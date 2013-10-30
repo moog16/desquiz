@@ -5,12 +5,12 @@ var path = require('path');
 
 module.exports = function(app) {
   app.get('/', function(req, res, next) {
-    res.type('html');
     var cookie = req.cookies['connect.sid'];
     User.findOne({
       'sid': cookie
     }, function(err, user) {
       if(user) {
+        res.type('html');
         res.render('index.html');
       } else if(!user) {
         res.redirect('/login');
@@ -21,7 +21,6 @@ module.exports = function(app) {
   });
 
   app.get('/login', function(req, res, next) {
-    res.type('html');
     var cookie = req.cookies['connect.sid'];
     User.findOne({
       'sid': cookie
@@ -29,6 +28,7 @@ module.exports = function(app) {
       if(user) {
         res.redirect('/');
       } else if(!user) {
+        res.type('html');
         res.render('login.html');
       } else if(err)  {
         res.send(err);
@@ -38,7 +38,7 @@ module.exports = function(app) {
 
   app.post('/login', function(req, res, next) {
     User.findOne({
-      'sid': req.cookies['connect.sid']
+      'email': req.body.email
     }, function(err, user) {
       if(!user) {
         user = new User({
@@ -52,11 +52,15 @@ module.exports = function(app) {
         });
       } else if(user) {
         if(user.password === req.body.pwd) {
-          res.redirect('/');
+          user.sid = req.cookies['connect.sid'];
+          user.save(function(err) {
+            if(err) res.send(err);
+            res.redirect('/');
+          });
         } else {
           res.send('incorrect password');
         }
-      } else if (err) {
+      } else {
         res.send('error', err);
       }
     });

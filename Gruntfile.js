@@ -42,6 +42,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server']
       },
+      karma: {
+        files: ['public/scripts/**/*.js', 'test/spec/**/*.js'],
+        tasks: ['karma:unit:run'] //NOTE the :run flag
+      },
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -311,7 +315,11 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: true,
+        background: true,
+        options: {
+          files: ['test/spec/**/*.js']
+        }
       }
     },
     cdnify: {
@@ -361,7 +369,8 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'connect:test',
-    'karma'
+    'karma',
+    'watch'
   ]);
 
   grunt.registerTask('build', [
