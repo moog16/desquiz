@@ -28,8 +28,6 @@ angular.module('deskQuizApp.results.controller', [])
                 match = true
       match
 
-
-
     questionAnswerMap = (results, questions) ->
       newResults = []
       for result in results
@@ -47,7 +45,7 @@ angular.module('deskQuizApp.results.controller', [])
                 if question.type is 'fillin'
                   correct = checkFillin result, question
                   correctAnswer = JSON.parse question.correctAnswer
-                else if result.answer is correctAnswer
+                if result.answer is correctAnswer or correct
                   $scope.correct++
                   correct = true
 

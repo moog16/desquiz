@@ -23,7 +23,7 @@ describe 'Controller: ResultsCtrl', () ->
     {
       'type' : 'multi',
       'question' : 'Given <div id=”outer”><div class=”inner”></div></div>, which of these two is the most performant way to select the inner div?',
-      'correctAnswer' : '0',
+      'correctAnswer' : '1',
       '_id' : '527009d9ed65b96fbf000005',
       'answers' : [ 
         'getElementById("outer").children[0]', 
@@ -57,8 +57,8 @@ describe 'Controller: ResultsCtrl', () ->
             'question' : '527009d9ed65b96fbf000005'
           }, {
               'answer' : [ 
-                  'mean', 
-                  'multi'
+                  "menu", 
+                  "menuitem"
               ],
               'question' : '527009d9ed65b96fbf000006'
           }
@@ -77,9 +77,9 @@ describe 'Controller: ResultsCtrl', () ->
     scope = $rootScope.$new()
     ResultsCtrl = $controller 'ResultsCtrl', {
       $scope: scope
-      # checkFillin: checkFillin
     }
     $httpBackend.flush()
+
 
   afterEach inject ($httpBackend) ->
      $httpBackend.verifyNoOutstandingExpectation()
@@ -88,6 +88,17 @@ describe 'Controller: ResultsCtrl', () ->
   it 'should initialze correct answers to 2', () ->
     expect(scope.correct).toBe 2
 
-  # console.log ResultsCtrl.checkFillin
-  # it 'should ', () ->
-    # ResultsCtrl.questionAnswerMap()
+  it 'should calculate the score', () ->
+    expect(scope.score).toBe '66.7'
+
+  it 'should have results that returns an array', () ->
+    expect(Array.isArray scope.results).toBe true
+
+  it 'should calculate the correct results', () ->
+    expect(scope.results[0].correct).toBe true
+
+  it 'should calcuate an incorrect answer', () ->
+    expect(scope.results[1].correct).toBe false
+
+  it 'should calcuate a correct fillin answer', () ->
+    expect(scope.results[2]['correct']).toBe true

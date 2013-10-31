@@ -66,27 +66,28 @@ describe 'Service: quizMaterial', () ->
       'sid' : 's:G5YRInlxcLH83beuCRDl+CkY.uEpBdIHmA6EL1C4UPBVjlCTSeCvgmlVq7xF4P70IwVY'
 
   describe 'getQuestions', () ->
+    questions = {}
     beforeEach inject ($httpBackend, $injector) ->
       quiz = $injector.get('quizMaterial')
 
-      spyOn(quiz, 'getQuestions')
-       .andCallThrough()
+      # spyOn(quiz, 'getQuestions')
+      #  .andCallThrough()
 
-      quiz.getQuestions().then
+    #   quiz.getQuestions().then (quizQuestions) ->
+    #     questions.resolvedValue = quizQuestions
 
-      $httpBackend.when('GET', url + '/quiz').respond mockQuestions
-      $httpBackend.when('GET', url + '/user').respond mockUser
-      $httpBackend.when('GET', url + '/results').respond mockUser.quizResults
-      $httpBackend.when('POST', url + '/results').respond mockUser._id
 
-      $httpBackend.flush()
+    #   $httpBackend.when('GET', url + '/quiz').respond mockQuestions
+    #   $httpBackend.when('GET', url + '/user').respond mockUser
+    #   $httpBackend.when('GET', url + '/results').respond mockUser.quizResults
+    #   $httpBackend.when('POST', url + '/results').respond mockUser._id
 
-    afterEach inject ($httpBackend) ->
-       $httpBackend.verifyNoOutstandingExpectation()
-       $httpBackend.verifyNoOutstandingRequest()
+    #   $httpBackend.flush()
 
-    14 googleApi.gapi().then(function(keys) {
-  15 reso
-    # it 'should have function, postAnswers', () ->
-      # service.postAnswers()
-      # expect(angular.isFunction service.postAnswers).toBe true
+    # afterEach inject ($httpBackend) ->
+    #    $httpBackend.verifyNoOutstandingExpectation()
+    #    $httpBackend.verifyNoOutstandingRequest()
+
+    # it 'should have function, getQuestions', () ->
+    #   expect(quiz.getQuestions)
+      # expect(angular.isFunction quiz.getQuestions).toBe true

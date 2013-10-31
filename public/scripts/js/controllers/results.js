@@ -61,7 +61,8 @@
                 if (question.type === 'fillin') {
                   correct = checkFillin(result, question);
                   correctAnswer = JSON.parse(question.correctAnswer);
-                } else if (result.answer === correctAnswer) {
+                }
+                if (result.answer === correctAnswer || correct) {
                   $scope.correct++;
                   correct = true;
                 }
