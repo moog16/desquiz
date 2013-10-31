@@ -65,25 +65,28 @@ describe 'Service: quizMaterial', () ->
       ],
       'sid' : 's:G5YRInlxcLH83beuCRDl+CkY.uEpBdIHmA6EL1C4UPBVjlCTSeCvgmlVq7xF4P70IwVY'
 
-  # Initialize the controller and a mock scope
-  beforeEach inject (quizMaterial, $httpBackend) ->
-    service = quizMaterial
+  describe 'getQuestions', () ->
+    beforeEach inject ($httpBackend, $injector) ->
+      quiz = $injector.get('quizMaterial')
 
-    $httpBackend.when('GET', url + '/quiz').respond mockQuestions
-    $httpBackend.when('GET', url + '/user').respond mockUser
-    $httpBackend.when('GET', url + '/results').respond mockUser.quizResults
-    $httpBackend.when('POST', url + '/results').respond mockUser._id
+      spyOn(quiz, 'getQuestions')
+       .andCallThrough()
 
-    $httpBackend.flush()
+      quiz.getQuestions().then
 
-  afterEach inject ($httpBackend) ->
-     $httpBackend.verifyNoOutstandingExpectation()
-     $httpBackend.verifyNoOutstandingRequest()
+      $httpBackend.when('GET', url + '/quiz').respond mockQuestions
+      $httpBackend.when('GET', url + '/user').respond mockUser
+      $httpBackend.when('GET', url + '/results').respond mockUser.quizResults
+      $httpBackend.when('POST', url + '/results').respond mockUser._id
 
-  it 'should have function, postAnswers', () ->
-    service.postAnswers()
-    expect(angular.isFunction service.postAnswers).toBe true
+      $httpBackend.flush()
 
-  # it 'should initialze correct answers to 2', () ->
-  #   expect(scope.correct).toBe 2
+    afterEach inject ($httpBackend) ->
+       $httpBackend.verifyNoOutstandingExpectation()
+       $httpBackend.verifyNoOutstandingRequest()
 
+    14 googleApi.gapi().then(function(keys) {
+  15 reso
+    # it 'should have function, postAnswers', () ->
+      # service.postAnswers()
+      # expect(angular.isFunction service.postAnswers).toBe true
