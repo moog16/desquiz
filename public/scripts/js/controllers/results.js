@@ -2,7 +2,7 @@
   'use strict';
   angular.module('deskQuizApp.results.controller', []).controller('ResultsCtrl', [
     '$scope', 'quizMaterial', 'user', function($scope, quizMaterial, user) {
-      var checkFillin, questionAnswerMap;
+      var questionAnswerMap;
       $scope.correct = 0;
       quizMaterial.getResults().then(function(results) {
         return quizMaterial.getQuestions().then(function(questions) {
@@ -13,7 +13,7 @@
       $scope.logout = function() {
         return user.logout();
       };
-      checkFillin = function(result, questions) {
+      $scope.checkFillin = function(result, questions) {
         var answers, match, _fn, _i, _len, _ref;
         answers = JSON.parse(questions.correctAnswer);
         match = true;
@@ -59,7 +59,7 @@
                 correctAnswer = question.answers[correctAnswerInd];
                 correct = false;
                 if (question.type === 'fillin') {
-                  correct = checkFillin(result, question);
+                  correct = $scope.checkFillin(result, question);
                   correctAnswer = JSON.parse(question.correctAnswer);
                 }
                 if (result.answer === correctAnswer || correct) {
