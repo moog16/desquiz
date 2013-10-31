@@ -6,7 +6,8 @@ module.exports = function() {
     question: String,
     answers: [],
     correctAnswer: String,
-    type: String
+    type: String,
+    func: Boolean
   });
 
   return mongoose.model('Question', QuestionSchema);
