@@ -5,8 +5,9 @@
   </div>
 
   <ol>
-    <li ng-repeat='result in results'>
-      {{result.question}}
+    <li class='resultsQ' ng-repeat='result in results'>
+      <pre ng-show='result.func'>{{result.question}}</pre>
+      <span ng-hide='result.func'>{{result.question}}</pre>
       <ul>
         <li>
           <span class='answers'>Your Answer:</span> {{result.answer}}

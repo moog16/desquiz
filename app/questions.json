@@ -11,7 +11,7 @@
   },
   {
       "type" : "multi",
-      "question" : "Given this:\nangular.module(‘myModule’).service(‘myService’,function() {\n\tvar message = “Message one!”\n\tvar getMessage = function() { return this.message }\n\tthis.message = “Message two!”\n\tthis.getMessage = function() { return message }\n\tfunction() {\n\t\t{\n\t\t\tgetMessage: getMessage,\n\t\t\tmessage: “Message three!”\n\t\t}\n\t}\n}\nWhich message will be returned by injecting this service and\nexecuting “myService.getMessage()”",
+      "question" : "Given this:\nangular.module(‘myModule’).service(‘myService’,function() {\n\tvar message = “Message one!”\n\tvar getMessage = function() { return this.message }\n\tthis.message = “Message two!”\n\tthis.getMessage = function() { return message }\n\tfunction() {\n\t\t{\n\t\t\tgetMessage: getMessage,\n\t\t\tmessage: “Message three!”\n\t\t}\n\t}\n}\nWhich message will be returned by injecting this service and\nexecuting “myService.getMessage()”?",
       "answers" : [ 
           1, 
           2, 

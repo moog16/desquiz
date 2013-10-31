@@ -83,3 +83,8 @@ ul li {
 pre {
   font-family: 'Source Sans', helvetica, arial, sans-serif;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mattthewgoo\/Dropbox\/Jobs\/deskQuiz\/public\/styles\/main\.scss}line{font-family:\0000376}}
+.resultsQ {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}

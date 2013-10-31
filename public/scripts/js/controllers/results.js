@@ -2,7 +2,7 @@
   'use strict';
   angular.module('deskQuizApp.results.controller', []).controller('ResultsCtrl', [
     '$scope', 'quizMaterial', 'user', function($scope, quizMaterial, user) {
-      var questionAnswerMap;
+      var checkFillin, questionAnswerMap;
       $scope.correct = 0;
       quizMaterial.getResults().then(function(results) {
         return quizMaterial.getQuestions().then(function(questions) {
@@ -13,7 +13,7 @@
       $scope.logout = function() {
         return user.logout();
       };
-      $scope.checkFillin = function(result, questions) {
+      checkFillin = function(result, questions) {
         var answers, match, _fn, _i, _len, _ref;
         answers = JSON.parse(questions.correctAnswer);
         match = true;
@@ -52,25 +52,30 @@
           _results = [];
           while (!found || index === questions.length - 1) {
             _results.push((function() {
-              var correct, correctAnswer, correctAnswerInd, question;
+              var correct, correctAnswer, correctAnswerInd, func, question;
               question = questions[index];
               if (questionId === question._id) {
                 correctAnswerInd = question.correctAnswer;
                 correctAnswer = question.answers[correctAnswerInd];
                 correct = false;
+                func = false;
                 if (question.type === 'fillin') {
-                  correct = $scope.checkFillin(result, question);
+                  correct = checkFillin(result, question);
                   correctAnswer = JSON.parse(question.correctAnswer);
                 }
                 if (result.answer === correctAnswer || correct) {
                   $scope.correct++;
                   correct = true;
                 }
+                if (question.func) {
+                  func = true;
+                }
                 newResults.push({
                   answer: result.answer,
                   question: question.question,
                   correctAnswer: correctAnswer,
-                  correct: correct
+                  correct: correct,
+                  func: func
                 });
                 index = 0;
                 found = true;

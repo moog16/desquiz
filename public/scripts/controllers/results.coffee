@@ -42,18 +42,21 @@ angular.module('deskQuizApp.results.controller', [])
                 correctAnswerInd = question.correctAnswer
                 correctAnswer = question.answers[correctAnswerInd]
                 correct = false
+                func = false
                 if question.type is 'fillin'
                   correct = checkFillin result, question
                   correctAnswer = JSON.parse question.correctAnswer
                 if result.answer is correctAnswer or correct
                   $scope.correct++
                   correct = true
+                if question.func then func = true
 
                 newResults.push(
                   answer: result.answer
                   question: question.question
                   correctAnswer: correctAnswer
-                  correct: correct)
+                  correct: correct
+                  func: func)
                 index = 0
                 found = true
               index++
